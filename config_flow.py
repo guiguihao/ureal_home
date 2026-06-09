@@ -12,10 +12,13 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from .api import CannotConnect, InvalidAuth, UrealHomeAPI
 from .const import (
     CONF_API_URL,
+    CONF_USERNAME,
+    CONF_PASSWORD,
     CONF_TOKEN,
     CONF_APP_KEY,
     CONF_SN,
     DEFAULT_API_URL,
+    DEFAULT_APP_KEY,
     DOMAIN,
 )
 
@@ -25,8 +28,9 @@ _LOGGER = logging.getLogger(__name__)
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_API_URL, default=DEFAULT_API_URL): str,
-        vol.Required(CONF_TOKEN): str,
-        vol.Required(CONF_APP_KEY): str,
+        vol.Required(CONF_USERNAME): str,
+        vol.Required(CONF_PASSWORD): str,
+        vol.Required(CONF_APP_KEY, default=DEFAULT_APP_KEY): str,
     }
 )
 
@@ -50,13 +54,18 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             session = async_get_clientsession(self.hass)
             api = UrealHomeAPI(
-                session,
-                user_input[CONF_API_URL],
-                token=user_input[CONF_TOKEN],
+                session=session,
+                api_url=user_input[CONF_API_URL],
                 app_key=user_input[CONF_APP_KEY],
             )
 
             try:
+                # 1. 登录并获取 Token
+                token = await api.async_login(
+                    user_input[CONF_USERNAME],
+                    user_input[CONF_PASSWORD],
+                )
+                # 2. 登录成功后，调用 async_get_homes 获取绑定的网关列表
                 homes = await api.async_get_homes()
             except InvalidAuth:
                 errors["base"] = "invalid_auth"
@@ -71,7 +80,9 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 else:
                     self._temporary_data = {
                         CONF_API_URL: user_input[CONF_API_URL],
-                        CONF_TOKEN: user_input[CONF_TOKEN],
+                        CONF_USERNAME: user_input[CONF_USERNAME],
+                        CONF_PASSWORD: user_input[CONF_PASSWORD],
+                        CONF_TOKEN: token,
                         CONF_APP_KEY: user_input[CONF_APP_KEY],
                     }
                     self._homes = homes
@@ -161,13 +172,17 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
             session = async_get_clientsession(self.hass)
             api = UrealHomeAPI(
-                session,
-                existing_entry.data[CONF_API_URL],
-                token=user_input[CONF_TOKEN],
+                session=session,
+                api_url=existing_entry.data[CONF_API_URL],
                 app_key=user_input[CONF_APP_KEY],
             )
 
             try:
+                # 重新登录以刷新 Token
+                token = await api.async_login(
+                    user_input[CONF_USERNAME],
+                    user_input[CONF_PASSWORD],
+                )
                 await api.async_get_homes()
             except InvalidAuth:
                 errors["base"] = "invalid_auth"
@@ -181,7 +196,9 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     existing_entry,
                     data={
                         **existing_entry.data,
-                        CONF_TOKEN: user_input[CONF_TOKEN],
+                        CONF_USERNAME: user_input[CONF_USERNAME],
+                        CONF_PASSWORD: user_input[CONF_PASSWORD],
+                        CONF_TOKEN: token,
                         CONF_APP_KEY: user_input[CONF_APP_KEY],
                     },
                 )
@@ -192,8 +209,9 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="reauth_confirm",
             data_schema=vol.Schema(
                 {
-                    vol.Required(CONF_TOKEN): str,
-                    vol.Required(CONF_APP_KEY): str,
+                    vol.Required(CONF_USERNAME): str,
+                    vol.Required(CONF_PASSWORD): str,
+                    vol.Required(CONF_APP_KEY, default=DEFAULT_APP_KEY): vol.All(str),
                 }
             ),
             errors=errors,

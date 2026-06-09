@@ -104,6 +104,32 @@ class UrealHomeAPI:
         
         raise CannotConnect(f"HTTP 请求在 {retries + 1} 次尝试后失败: {last_error}")
 
+    async def async_login(self, phone: str, password: str) -> str:
+        """登录云端平台，并获取用于后续请求的访问凭证（Token）。"""
+        if len(password) == 32 and all(c in "0123456789abcdefABCDEF" for c in password):
+            md5_pwd = password.lower()
+        else:
+            md5_pwd = hashlib.md5(password.encode()).hexdigest()
+
+        import uuid
+        device_id = str(uuid.uuid4())
+
+        payload = {
+            "phone": phone,
+            "pwd": md5_pwd,
+            "phoneType": 3,
+            "brand": "ha",
+            "model": "ha",
+            "deviceId": device_id,
+            "systemVer": "1.0",
+        }
+
+        res = await self._post("/user/login", payload)
+        if res and isinstance(res, dict) and "token" in res:
+            self._token = res["token"]
+            return self._token
+        raise InvalidAuth("登录接口未返回有效的 token")
+
     async def async_get_homes(self) -> list[dict[str, Any]]:
         """获取用户家庭/网关列表。"""
         res = await self._post("/host/list2")
