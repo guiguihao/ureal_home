@@ -1,0 +1,41 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to hzureal Cloud",
+        "description": "Enter your hzureal Token and App Key.",
+        "data": {
+          "api_url": "API URL",
+          "token": "Token",
+          "app_key": "App Key"
+        }
+      },
+      "select_gateway": {
+        "title": "Select Gateway",
+        "description": "Choose which gateway (SN) you want to integrate.",
+        "data": {
+          "sn": "Gateway SN"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Re-authenticate hzureal",
+        "description": "Your session has expired. Please enter your Token and App Key again.",
+        "data": {
+          "token": "Token",
+          "app_key": "App Key"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the server. Check the API URL.",
+      "invalid_auth": "Invalid Token or App Key.",
+      "no_gateways": "No gateways found for this account.",
+      "unknown": "An unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This gateway is already configured.",
+      "entry_not_found": "Config entry not found.",
+      "reauth_successful": "Re-authentication was successful."
+    }
+  }
+}

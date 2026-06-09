@@ -1,0 +1,33 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "登录 ureal-home",
+        "description": "请输入您的 ureal-home 云平台账号信息。",
+        "data": {
+          "api_url": "API 地址",
+          "username": "用户名",
+          "password": "密码"
+        }
+      },
+      "reauth_confirm": {
+        "title": "重新验证 ureal-home",
+        "description": "您的登录已过期，请重新输入账号密码。",
+        "data": {
+          "username": "用户名",
+          "password": "密码"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "无法连接到服务器，请检查 API 地址。",
+      "invalid_auth": "用户名或密码错误。",
+      "unknown": "发生未知错误。"
+    },
+    "abort": {
+      "already_configured": "该账号已配置过。",
+      "entry_not_found": "找不到配置条目。",
+      "reauth_successful": "重新验证成功。"
+    }
+  }
+}
