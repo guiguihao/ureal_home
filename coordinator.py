@@ -73,7 +73,7 @@ class UrealHomeCoordinator(DataUpdateCoordinator[dict[str, Any]]):
 
         # 构造每个设备的异步获取状态任务
         status_tasks = {
-            str(device["did"]): self.api.async_get_device_status(str(device["did"]))
+            str(device["did"]): self.api.async_get_device_status(str(device["did"]), device.get("sn"))
             for device in devices
         }
         # 并发执行所有状态查询任务

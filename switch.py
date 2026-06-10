@@ -118,12 +118,16 @@ class UrealHomeSwitch(UrealHomeEntity, SwitchEntity):
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         """执行开启操作。"""
-        await self._api.async_set_device_property(self._device_id, self._idx, self._control_node, "on")
+        await self._api.async_set_device_property(
+            self._device_id, self._idx, self._control_node, "on", self._device.get("sn")
+        )
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         """执行关闭操作。"""
-        await self._api.async_set_device_property(self._device_id, self._idx, self._control_node, "off")
+        await self._api.async_set_device_property(
+            self._device_id, self._idx, self._control_node, "off", self._device.get("sn")
+        )
         await self.coordinator.async_request_refresh()
 
 
