@@ -86,36 +86,7 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         CONF_APP_KEY: user_input[CONF_APP_KEY],
                     }
                     self._homes = homes
-
-                    if len(homes) == 1:
-                        home = homes[0]
-                        sn = home["sn"]
-                        name = home.get("name") or sn
-                        
-                        await self.async_set_unique_id(sn)
-                        self._abort_if_unique_id_configured()
-
-                        # 验证是否可以成功获取该 SN 对应的设备列表
-                        api._sn = sn
-                        try:
-                            await api.async_get_devices()
-                        except InvalidAuth:
-                            errors["base"] = "invalid_auth"
-                        except CannotConnect:
-                            errors["base"] = "cannot_connect"
-                        except Exception:  # noqa: BLE001
-                            _LOGGER.exception("Unexpected error during device list verification")
-                            errors["base"] = "unknown"
-                        else:
-                            return self.async_create_entry(
-                                title=name,
-                                data={
-                                    **self._temporary_data,
-                                    CONF_SN: sn,
-                                },
-                            )
-                    else:
-                        return await self.async_step_select_gateway()
+                    return await self.async_step_select_gateway()
 
         return self.async_show_form(
             step_id="user",
@@ -183,7 +154,7 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def async_step_reauth(
-        self, entry_data: dict[str, Any]
+        self, user_input: dict[str, Any]
     ) -> config_entries.ConfigFlowResult:
         """处理重新认证流程。"""
         return await self.async_step_reauth_confirm()

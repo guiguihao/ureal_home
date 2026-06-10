@@ -57,6 +57,16 @@ class UrealHomeCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         """实际拉取数据的逻辑。"""
         # 1. 从云端拉取当前账号绑定的设备列表
         devices = await self.api.async_get_devices()
+        _LOGGER.info("获取到设备列表，共 %d 个设备", len(devices))
+        for dev in devices:
+            _LOGGER.debug(
+                "  设备: did=%s alias=%s type=%s",
+                dev.get("did"), dev.get("alias"), dev.get("type"),
+            )
+
+        if not devices:
+            _LOGGER.warning("设备列表为空，可能 SN 配置有误或账号无绑定设备")
+            return {"devices": [], "status": {}}
 
         # 2. 并行获取列表中每个设备的最新属性状态
         import asyncio  # noqa: PLC0415
@@ -85,7 +95,9 @@ class UrealHomeCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 status[device_id] = result
 
         # 返回包含设备列表和各设备状态的字典，实体会自动通过 coordinator.data 拿到这些数据
+        _LOGGER.info("数据刷新完成: %d 个设备", len(devices))
         return {"devices": devices, "status": status}
+
 
     async def _async_update_data(self) -> dict[str, Any]:
         """从云端 API 获取最新数据。

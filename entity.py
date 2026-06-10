@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 from homeassistant.helpers.device_registry import DeviceInfo
@@ -9,6 +10,9 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
 from .coordinator import UrealHomeCoordinator
+
+_LOGGER = logging.getLogger(__name__)
+
 
 
 class UrealHomeEntity(CoordinatorEntity[UrealHomeCoordinator]):
@@ -61,16 +65,12 @@ class UrealHomeEntity(CoordinatorEntity[UrealHomeCoordinator]):
     def available(self) -> bool:
         """判断当前实体是否可用（在线）。
 
-        如果协调器无法连接或者云端设备上报为离线（online=False），实体在 HA 界面上会显示为“不可用”灰色状态。
+        只要协调器能正常拉取到数据，实体即视为可用。
+        仅当 QueryLinkStat 明确返回 'offline' 时，才标记为不可用。
         """
         if not super().available:
             return False
-        
-        # 在协调器拉取的设备列表中查找当前设备，并利用 QueryLinkStat 状态判断在线状态
-        devices = (self.coordinator.data or {}).get("devices", [])
-        for dev in devices:
-            if str(dev["did"]) == self._device_id:
-                link_stat = self._device_status.get("QueryLinkStat:0")
-                return link_stat != "offline"
-        return False
 
+        # 仅当 API 明确上报 offline 时才标记为不可用
+        link_stat = self._device_status.get("QueryLinkStat:0")
+        return link_stat != "offline"

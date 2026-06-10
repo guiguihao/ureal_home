@@ -34,17 +34,21 @@ async def async_setup_entry(
     entities: list[UrealHomeSensor] = []
     devices = (coordinator.data or {}).get("devices", [])
 
+    _LOGGER.info("传感器平台初始化: 找到 %d 个设备", len(devices))
+
     for device in devices:
         did = str(device["did"])
         dev_type = device.get("type", "")
-        
+
         # 1. 优先使用静态能力映射来创建实体，防止设备离线或无缓存时无法注册实体
         if dev_type in DEVICE_CAPABILITIES:
             sensors = DEVICE_CAPABILITIES[dev_type].get("sensors", [])
+            _LOGGER.debug("设备 did=%s type=%s → 静态映射: %d 个传感器", did, dev_type, len(sensors))
             for prop_key, idx in sensors:
                 entities.append(UrealHomeSensor(coordinator, device, prop_key, idx))
         else:
             # 2. 如果型号未知，降级使用动态状态轮询发现
+            _LOGGER.debug("设备 did=%s type=%s → 未知型号，使用动态发现", did, dev_type)
             status = (coordinator.data or {}).get("status", {}).get(did, {})
             for status_key in status:
                 if ":" in status_key:
@@ -60,7 +64,9 @@ async def async_setup_entry(
                 if prop_key in SENSOR_DESCRIPTIONS:
                     entities.append(UrealHomeSensor(coordinator, device, prop_key, idx))
 
+    _LOGGER.info("传感器平台注册 %d 个实体", len(entities))
     async_add_entities(entities)
+
 
 
 class UrealHomeSensor(UrealHomeEntity, SensorEntity):

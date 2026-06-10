@@ -31,6 +31,8 @@ async def async_setup_entry(
     entities: list[UrealHomeSwitch] = []
     devices = (coordinator.data or {}).get("devices", [])
 
+    _LOGGER.info("开关平台初始化: 找到 %d 个设备", len(devices))
+
     for device in devices:
         did = str(device["did"])
         dev_type = device.get("type", "")
@@ -38,6 +40,7 @@ async def async_setup_entry(
         # 1. 优先使用静态能力映射来创建开关实体，防止离线无法加载实体
         if dev_type in DEVICE_CAPABILITIES:
             switches = DEVICE_CAPABILITIES[dev_type].get("switches", [])
+            _LOGGER.debug("设备 did=%s type=%s → 静态映射: %d 个开关", did, dev_type, len(switches))
             for control_node, feedback_node, idx, alias in switches:
                 entities.append(
                     UrealHomeSwitch(
@@ -52,6 +55,7 @@ async def async_setup_entry(
                 )
         else:
             # 2. 如果型号未知，降级使用动态状态轮询或 names 元数据发现
+            _LOGGER.debug("设备 did=%s type=%s → 未知型号，使用动态发现", did, dev_type)
             names = device.get("names")
             if names and isinstance(names, list):
                 for item in names:
@@ -69,7 +73,9 @@ async def async_setup_entry(
                     name = device.get("alias") or device.get("name") or did
                     entities.append(UrealHomeSwitch(coordinator, api, device, idx=0, name=name))
 
+    _LOGGER.info("开关平台注册 %d 个实体", len(entities))
     async_add_entities(entities)
+
 
 
 class UrealHomeSwitch(UrealHomeEntity, SwitchEntity):

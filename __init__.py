@@ -18,14 +18,20 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """从配置条目（ConfigEntry）初始化并启动集成。"""
-    
+
     # 1. 实例化 aiohttp 客户端 session 与 API 客户端
     session = async_get_clientsession(hass)
-    
+
     token = entry.data[CONF_TOKEN]
     app_key = entry.data[CONF_APP_KEY]
     sn = entry.data[CONF_SN]
-    
+
+    _LOGGER.info(
+        "正在初始化集成: api_url=%s sn=%s",
+        entry.data.get(CONF_API_URL),
+        sn,
+    )
+
     api = UrealHomeAPI(
         session=session,
         api_url=entry.data[CONF_API_URL],
@@ -38,7 +44,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator = UrealHomeCoordinator(hass, api, entry)
 
     # 3. 立即进行首次数据刷新（拉取设备列表和属性），如果失败会引发 ConfigEntryNotReady 异常延迟重试
-    await coordinator.async_config_entry_first_refresh()
+    try:
+        await coordinator.async_config_entry_first_refresh()
+    except Exception:
+        _LOGGER.exception("首次数据刷新失败")
+        raise
+
+    device_count = len((coordinator.data or {}).get("devices", []))
+    _LOGGER.info("集成初始化完成，加载了 %d 个设备", device_count)
 
     # 4. 将 api 和 coordinator 实例存入 hass.data 共享中，以便各个平台实体访问
     hass.data.setdefault(DOMAIN, {})
@@ -50,6 +63,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     # 6. 将配置异步转发到各个实体平台（如 sensor、switch 等）进行子设备初始化
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
+
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
