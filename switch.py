@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -121,6 +122,15 @@ class UrealHomeSwitch(UrealHomeEntity, SwitchEntity):
         await self._api.async_set_device_property(
             self._device_id, self._idx, self._control_node, "on", self._device.get("sn")
         )
+        # 乐观更新本地缓存状态，防止 UI 状态回跳
+        if self.coordinator.data and "status" in self.coordinator.data:
+            status = self.coordinator.data["status"].setdefault(self._device_id, {})
+            status[f"{self._feedback_node}:{self._idx}"] = "on"
+            status[f"{self._control_node}:{self._idx}"] = "on"
+        self.async_write_ha_state()
+
+        # 延迟 2 秒后请求刷新，给云端状态同步留出缓冲时间
+        await asyncio.sleep(2.0)
         await self.coordinator.async_request_refresh()
 
     async def async_turn_off(self, **kwargs: Any) -> None:
@@ -128,6 +138,15 @@ class UrealHomeSwitch(UrealHomeEntity, SwitchEntity):
         await self._api.async_set_device_property(
             self._device_id, self._idx, self._control_node, "off", self._device.get("sn")
         )
+        # 乐观更新本地缓存状态，防止 UI 状态回跳
+        if self.coordinator.data and "status" in self.coordinator.data:
+            status = self.coordinator.data["status"].setdefault(self._device_id, {})
+            status[f"{self._feedback_node}:{self._idx}"] = "off"
+            status[f"{self._control_node}:{self._idx}"] = "off"
+        self.async_write_ha_state()
+
+        # 延迟 2 秒后请求刷新，给云端状态同步留出缓冲时间
+        await asyncio.sleep(2.0)
         await self.coordinator.async_request_refresh()
 
 
