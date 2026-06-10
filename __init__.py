@@ -35,7 +35,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
 
     # 2. 创建数据更新协调器（Coordinator）负责后续的定时数据轮询
-    coordinator = UrealHomeCoordinator(hass, api)
+    coordinator = UrealHomeCoordinator(hass, api, entry)
 
     # 3. 立即进行首次数据刷新（拉取设备列表和属性），如果失败会引发 ConfigEntryNotReady 异常延迟重试
     await coordinator.async_config_entry_first_refresh()

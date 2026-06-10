@@ -15,75 +15,11 @@ from homeassistant.const import PERCENTAGE, UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DATA_COORDINATOR, DOMAIN
+from .const import DATA_COORDINATOR, DOMAIN, DEVICE_CAPABILITIES, SENSOR_DESCRIPTIONS
 from .coordinator import UrealHomeCoordinator
 from .entity import UrealHomeEntity
 
 _LOGGER = logging.getLogger(__name__)
-
-# 云端属性字段与 HA 传感器元数据（名称、单位、设备类别、状态类别）的映射表
-SENSOR_DESCRIPTIONS: dict[str, tuple[str, str | None, SensorDeviceClass | None, SensorStateClass | None]] = {
-    "QueryTemp": (
-        "温度",
-        UnitOfTemperature.CELSIUS,
-        SensorDeviceClass.TEMPERATURE,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QueryRoomTemp": (
-        "室内温度",
-        UnitOfTemperature.CELSIUS,
-        SensorDeviceClass.TEMPERATURE,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QuerySetTemp": (
-        "设定温度",
-        UnitOfTemperature.CELSIUS,
-        SensorDeviceClass.TEMPERATURE,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QueryHumidity": (
-        "湿度",
-        PERCENTAGE,
-        SensorDeviceClass.HUMIDITY,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QueryPM2.5": (
-        "PM2.5",
-        "µg/m³",
-        SensorDeviceClass.PM25,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QueryCO2": (
-        "二氧化碳",
-        "ppm",
-        SensorDeviceClass.CO2,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QueryCH2O": (
-        "甲醛",
-        "mg/m³",
-        None,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QueryDewPointTemp": (
-        "露点温度",
-        UnitOfTemperature.CELSIUS,
-        SensorDeviceClass.TEMPERATURE,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QuerySignalQuality": (
-        "信号质量",
-        "dBm",
-        None,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "battery": (
-        "电量",
-        PERCENTAGE,
-        SensorDeviceClass.BATTERY,
-        SensorStateClass.MEASUREMENT,
-    ),
-}
 
 
 async def async_setup_entry(
@@ -100,22 +36,29 @@ async def async_setup_entry(
 
     for device in devices:
         did = str(device["did"])
-        status = (coordinator.data or {}).get("status", {}).get(did, {})
+        dev_type = device.get("type", "")
         
-        # 遍历设备状态，并动态提取出对应的传感器实体
-        for status_key in status:
-            if ":" in status_key:
-                prop_key, idx_str = status_key.split(":", 1)
-                try:
-                    idx = int(idx_str)
-                except ValueError:
-                    idx = 0
-            else:
-                prop_key = status_key
-                idx = 0
-
-            if prop_key in SENSOR_DESCRIPTIONS:
+        # 1. 优先使用静态能力映射来创建实体，防止设备离线或无缓存时无法注册实体
+        if dev_type in DEVICE_CAPABILITIES:
+            sensors = DEVICE_CAPABILITIES[dev_type].get("sensors", [])
+            for prop_key, idx in sensors:
                 entities.append(UrealHomeSensor(coordinator, device, prop_key, idx))
+        else:
+            # 2. 如果型号未知，降级使用动态状态轮询发现
+            status = (coordinator.data or {}).get("status", {}).get(did, {})
+            for status_key in status:
+                if ":" in status_key:
+                    prop_key, idx_str = status_key.split(":", 1)
+                    try:
+                        idx = int(idx_str)
+                    except ValueError:
+                        idx = 0
+                else:
+                    prop_key = status_key
+                    idx = 0
+
+                if prop_key in SENSOR_DESCRIPTIONS:
+                    entities.append(UrealHomeSensor(coordinator, device, prop_key, idx))
 
     async_add_entities(entities)
 

@@ -31,14 +31,6 @@ class UrealHomeEntity(CoordinatorEntity[UrealHomeCoordinator]):
         self._device = device
         self._device_id: str = str(device["did"])
 
-    # ------------------------------------------------------------------
-    # 设备标识与设备注册表分组
-    # ------------------------------------------------------------------
-
-    @property
-    def unique_id(self) -> str:
-        """返回此实体的全局唯一标识符（由域名和设备ID组合而成）。"""
-        return f"{DOMAIN}_{self._device_id}"
 
     @property
     def device_info(self) -> DeviceInfo:

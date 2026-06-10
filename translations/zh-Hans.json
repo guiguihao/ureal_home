@@ -2,30 +2,40 @@
   "config": {
     "step": {
       "user": {
-        "title": "登录 ureal-home",
-        "description": "请输入您的 ureal-home 云平台账号信息。",
+        "title": "连接到 ureal-home 云平台",
+        "description": "请输入您的 ureal-home 云平台凭据（手机号、密码和 App Key）。",
         "data": {
           "api_url": "API 地址",
-          "username": "用户名",
-          "password": "密码"
+          "username": "手机号",
+          "password": "密码",
+          "app_key": "App Key"
+        }
+      },
+      "select_gateway": {
+        "title": "选择网关",
+        "description": "请选择要集成的网关（SN）。",
+        "data": {
+          "sn": "网关 SN"
         }
       },
       "reauth_confirm": {
         "title": "重新验证 ureal-home",
-        "description": "您的登录已过期，请重新输入账号密码。",
+        "description": "您的会话已过期，请重新输入密码和 App Key。",
         "data": {
-          "username": "用户名",
-          "password": "密码"
+          "username": "手机号",
+          "password": "密码",
+          "app_key": "App Key"
         }
       }
     },
     "error": {
       "cannot_connect": "无法连接到服务器，请检查 API 地址。",
-      "invalid_auth": "用户名或密码错误。",
+      "invalid_auth": "手机号、密码或 App Key 错误。",
+      "no_gateways": "该账号下未找到任何网关。",
       "unknown": "发生未知错误。"
     },
     "abort": {
-      "already_configured": "该账号已配置过。",
+      "already_configured": "该网关已配置过。",
       "entry_not_found": "找不到配置条目。",
       "reauth_successful": "重新验证成功。"
     }

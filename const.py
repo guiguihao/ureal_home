@@ -13,7 +13,7 @@ CONF_API_URL = "api_url"
 DEFAULT_APP_KEY = "bc305460cb4d5bcd934fd24d7863fe3c"
 
 # Default values
-DEFAULT_API_URL = "https://app-user.hzureal.com"
+DEFAULT_API_URL = "https://test-app-user.hzureal.com"
 DEFAULT_SCAN_INTERVAL = 30  # seconds
 
 # Platforms to load
@@ -27,3 +27,8 @@ DEVICE_TYPE_LIGHT = "light"
 # hass.data keys
 DATA_COORDINATOR = "coordinator"
 DATA_API = "api"
+
+# Import capability mapping and sensor descriptions database
+from .capabilities import DEVICE_CAPABILITIES, SENSOR_DESCRIPTIONS
+
+

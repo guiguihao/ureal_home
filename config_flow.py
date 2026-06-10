@@ -95,15 +95,27 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         await self.async_set_unique_id(sn)
                         self._abort_if_unique_id_configured()
 
-                        return self.async_create_entry(
-                            title=name,
-                            data={
-                                **self._temporary_data,
-                                CONF_SN: sn,
-                            },
-                        )
-                    
-                    return await self.async_step_select_gateway()
+                        # 验证是否可以成功获取该 SN 对应的设备列表
+                        api._sn = sn
+                        try:
+                            await api.async_get_devices()
+                        except InvalidAuth:
+                            errors["base"] = "invalid_auth"
+                        except CannotConnect:
+                            errors["base"] = "cannot_connect"
+                        except Exception:  # noqa: BLE001
+                            _LOGGER.exception("Unexpected error during device list verification")
+                            errors["base"] = "unknown"
+                        else:
+                            return self.async_create_entry(
+                                title=name,
+                                data={
+                                    **self._temporary_data,
+                                    CONF_SN: sn,
+                                },
+                            )
+                    else:
+                        return await self.async_step_select_gateway()
 
         return self.async_show_form(
             step_id="user",
@@ -128,13 +140,32 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             await self.async_set_unique_id(sn)
             self._abort_if_unique_id_configured()
 
-            return self.async_create_entry(
-                title=name,
-                data={
-                    **self._temporary_data,
-                    CONF_SN: sn,
-                },
+            # 验证是否可以成功获取该 SN 对应的设备列表
+            session = async_get_clientsession(self.hass)
+            api = UrealHomeAPI(
+                session=session,
+                api_url=self._temporary_data[CONF_API_URL],
+                token=self._temporary_data[CONF_TOKEN],
+                app_key=self._temporary_data[CONF_APP_KEY],
+                sn=sn,
             )
+            try:
+                await api.async_get_devices()
+            except InvalidAuth:
+                errors["base"] = "invalid_auth"
+            except CannotConnect:
+                errors["base"] = "cannot_connect"
+            except Exception:  # noqa: BLE001
+                _LOGGER.exception("Unexpected error during device list verification")
+                errors["base"] = "unknown"
+            else:
+                return self.async_create_entry(
+                    title=name,
+                    data={
+                        **self._temporary_data,
+                        CONF_SN: sn,
+                    },
+                )
 
         home_choices = {
             home["sn"]: f"{home.get('name') or home['sn']} ({home['sn']})"
@@ -183,7 +214,9 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     user_input[CONF_USERNAME],
                     user_input[CONF_PASSWORD],
                 )
-                await api.async_get_homes()
+                # 使用已有 SN 验证设备获取
+                api._sn = existing_entry.data.get(CONF_SN)
+                await api.async_get_devices()
             except InvalidAuth:
                 errors["base"] = "invalid_auth"
             except CannotConnect:
