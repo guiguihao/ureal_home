@@ -17,7 +17,7 @@ DEFAULT_API_URL = "https://test-app-user.hzureal.com"
 DEFAULT_SCAN_INTERVAL = 30  # seconds
 
 # Platforms to load
-PLATFORMS = ["sensor", "switch"]
+PLATFORMS = ["sensor", "switch", "number", "select"]
 
 # Device type identifiers (match values returned by your cloud API)
 DEVICE_TYPE_SENSOR = "sensor"

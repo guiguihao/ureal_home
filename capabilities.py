@@ -65,16 +65,16 @@ SENSOR_DESCRIPTIONS = {
         SensorStateClass.MEASUREMENT,
     ),
     "PumpStartTemp": (
-        "循环泵启动温度设置",
-        None,
-        None,
-        None,
+        "热水循环泵启动温度",
+        UnitOfTemperature.CELSIUS,
+        SensorDeviceClass.TEMPERATURE,
+        SensorStateClass.MEASUREMENT,
     ),
     "PumpStopTemp": (
-        "循环泵关闭温度设置",
-        None,
-        None,
-        None,
+        "热水循环泵关闭温度",
+        UnitOfTemperature.CELSIUS,
+        SensorDeviceClass.TEMPERATURE,
+        SensorStateClass.MEASUREMENT,
     ),
     "QueryACCloseOffset": (
         "空调阀关温差",
@@ -538,12 +538,6 @@ SENSOR_DESCRIPTIONS = {
         None,
         None,
     ),
-    "QueryBrightness": (
-        "设定亮度",
-        None,
-        None,
-        None,
-    ),
     "QueryBurning": (
         "点火燃烧中",
         None,
@@ -651,12 +645,6 @@ SENSOR_DESCRIPTIONS = {
         UnitOfTemperature.CELSIUS,
         SensorDeviceClass.TEMPERATURE,
         SensorStateClass.MEASUREMENT,
-    ),
-    "QueryColorTemp": (
-        "设定色温",
-        None,
-        None,
-        None,
     ),
     "QueryCommAddr": (
         "通讯地址",
@@ -813,12 +801,6 @@ SENSOR_DESCRIPTIONS = {
         None,
         None,
         None,
-    ),
-    "QueryCoolBackwardTemp": (
-        "制冷回水温度",
-        UnitOfTemperature.CELSIUS,
-        SensorDeviceClass.TEMPERATURE,
-        SensorStateClass.MEASUREMENT,
     ),
     "QueryCoolContactStat": (
         "制冷触点状态",
@@ -1007,7 +989,7 @@ SENSOR_DESCRIPTIONS = {
         SensorStateClass.MEASUREMENT,
     ),
     "QueryDehumSetUp": (
-        "除湿设定",
+        "设定除湿",
         PERCENTAGE,
         SensorDeviceClass.HUMIDITY,
         SensorStateClass.MEASUREMENT,
@@ -1265,19 +1247,13 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "QueryExhaustTemp": (
-        "压缩机排气温度",
+        "排气温度",
         UnitOfTemperature.CELSIUS,
         SensorDeviceClass.TEMPERATURE,
         SensorStateClass.MEASUREMENT,
     ),
     "QueryExportContact": (
         "输出干接点",
-        None,
-        None,
-        None,
-    ),
-    "QueryExportSpeed": (
-        "排风风速",
         None,
         None,
         None,
@@ -2231,7 +2207,7 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "QueryHumidifySetUp": (
-        "加湿设定",
+        "设定加湿",
         PERCENTAGE,
         SensorDeviceClass.HUMIDITY,
         SensorStateClass.MEASUREMENT,
@@ -2298,12 +2274,6 @@ SENSOR_DESCRIPTIONS = {
     ),
     "QueryIdleStat": (
         "机组待机态",
-        None,
-        None,
-        None,
-    ),
-    "QueryImportSpeed": (
-        "进风风速",
         None,
         None,
         None,
@@ -2422,12 +2392,6 @@ SENSOR_DESCRIPTIONS = {
         None,
         None,
     ),
-    "QueryLevel": (
-        "开度",
-        PERCENTAGE,
-        SensorDeviceClass.HUMIDITY,
-        SensorStateClass.MEASUREMENT,
-    ),
     "QueryLimitFreqValue": (
         "压缩机当前限频值",
         "Hz",
@@ -2478,12 +2442,6 @@ SENSOR_DESCRIPTIONS = {
     ),
     "QueryLockFunction": (
         "锁定功能",
-        None,
-        None,
-        None,
-    ),
-    "QueryLoopMode": (
-        "循环模式",
         None,
         None,
         None,
@@ -2771,7 +2729,7 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "QueryMode": (
-        "模式",
+        "工作模式",
         None,
         None,
         None,
@@ -3508,18 +3466,6 @@ SENSOR_DESCRIPTIONS = {
         SensorDeviceClass.TEMPERATURE,
         SensorStateClass.MEASUREMENT,
     ),
-    "QuerySetFanDehum": (
-        "除湿风机设定",
-        PERCENTAGE,
-        SensorDeviceClass.HUMIDITY,
-        SensorStateClass.MEASUREMENT,
-    ),
-    "QuerySetFanRegen": (
-        "再生风机设定",
-        PERCENTAGE,
-        SensorDeviceClass.HUMIDITY,
-        SensorStateClass.MEASUREMENT,
-    ),
     "QuerySetFilterUsedTime": (
         "滤网运行时间",
         "h",
@@ -3539,7 +3485,7 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "QuerySetHumidity": (
-        "设定湿度",
+        "实际湿度",
         PERCENTAGE,
         SensorDeviceClass.HUMIDITY,
         SensorStateClass.MEASUREMENT,
@@ -4457,10 +4403,10 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "TempModeDelayTime": (
-        "延时时间配置",
-        None,
-        None,
-        None,
+        "临时模式延时时间",
+        UnitOfTemperature.CELSIUS,
+        SensorDeviceClass.TEMPERATURE,
+        SensorStateClass.MEASUREMENT,
     ),
     "VoiceSwitch": (
         "声音开关",
@@ -4526,13 +4472,18 @@ SENSOR_DESCRIPTIONS = {
 
 DEVICE_CAPABILITIES = {
     "RL-AC-COM-AIROSD-01": {
+        "name": "欧思丹变频热泵",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 5.0, 25.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 30.0, 50.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryHeatWaterTemp", 0),
             ("QuerySystemStat", 0),
             ("QueryHotWaterTemp", 0),
@@ -4553,15 +4504,20 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-CARRIER-01": {
+        "name": "开利两联供空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
             ("QuerySetTemp", 0),
             ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryExternalNum", 0),
-            ("QueryMode", 0),
             ("QueryCtrlMode", 0),
             ("QueryPumpType", 0),
             ("QuerySystemStat", 0),
@@ -4569,8 +4525,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-CARRIER-01S": {
+        "name": "开利两联供空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryMode", 0),
@@ -4584,7 +4545,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-CARRIER-02": {
-        "switches": [],
+        "name": "开利两联供空调网关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -4596,19 +4563,30 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-CARRIER-02NS": {
+        "name": "开利两联供空调网关主外机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 5.0, 25.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 15.0, 55.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QuerySystemError", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-AC-COM-CARRIER-02S": {
-        "switches": [],
+        "name": "开利两联供空调网关从外机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -4617,13 +4595,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-CLIMAVENETA-01": {
+        "name": "克莱门特外机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 5.0, 25.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 30.0, 55.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryCoolTempOffset", 0),
             ("QueryHeatTempOffset", 0),
             ("QueryEnvTemp", 0),
@@ -4634,7 +4617,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-CLIMAVENETA-01-S": {
-        "switches": [],
+        "name": "克莱门特外机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -4650,7 +4639,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-EMERSON-01": {
-        "switches": [],
+        "name": "艾默生外机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryOutsideExhaustTemp", 0),
             ("QueryStreamSwitch", 0),
@@ -4680,7 +4675,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-EMERSON-02": {
-        "switches": [],
+        "name": "艾默生外机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryOutsideExhaustTemp", 0),
             ("QueryStreamSwitch", 0),
@@ -4710,8 +4711,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-EMMETI-01": {
+        "name": "玻玛热泵主机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryMode", 0),
@@ -4740,7 +4746,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-EMMETI-01-S": {
-        "switches": [],
+        "name": "玻玛热泵主机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -4769,10 +4781,15 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-ENERGY-01": {
+        "name": "纽恩泰热泵主机",
         "switches": [
-            ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
+            ("QuerySwitch", 0),
             ("QueryMode", 0),
             ("QueryDefrostMode", 0),
             ("QueryRemoteLock", 0),
@@ -4809,10 +4826,15 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-ENERGY-01-S": {
+        "name": "纽恩泰热泵主机",
         "switches": [
-            ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
+            ("QuerySwitch", 0),
             ("QueryMode", 0),
             ("QueryDefrostMode", 0),
             ("QueryRemoteLock", 0),
@@ -4849,8 +4871,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-GXMD-01": {
+        "name": "国祥风冷热泵机组",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRunStat", 0),
@@ -4867,8 +4894,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-HPD-01": {
+        "name": "汉普顿热泵主机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRemoteSwitch", 0),
@@ -4888,14 +4920,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-HY-01": {
+        "name": "鸿雁热泵主机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 10.0, 32.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 12.0, 99.0, UnitOfTemperature.CELSIUS),
+            ("HotWaterSetTemp", "QueryHotWaterSetTemp", 0, "热水设定温度", 20.0, 58.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
-            ("QueryHotWaterSetTemp", 0),
             ("QueryEnvTemp", 0),
             ("QueryInletWaterTemp", 0),
             ("QueryOutletWaterTemp", 0),
@@ -4903,7 +4940,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-HY-01-S": {
-        "switches": [],
+        "name": "鸿雁热泵从机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -4917,8 +4960,14 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-MCQUAY-01": {
+        "name": "麦克维尔外机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '地暖': 'floorheat'}, ['制冷', '制热', '地暖']),
         ],
         "sensors": [
             ("QueryInletWaterTemp", 0),
@@ -4933,7 +4982,6 @@ DEVICE_CAPABILITIES = {
             ("QueryACWaterPump", 0),
             ("QueryRemoteSwitch", 0),
             ("QueryWaterSysThreePortValve", 0),
-            ("QueryMode", 0),
             ("QuerySystem2SelfTurnOn", 0),
             ("QueryLinkMode", 0),
             ("QueryCompressorOutputRadio", 0),
@@ -4951,18 +4999,29 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-MCQUAY-02": {
+        "name": "麦克维尔空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
             ("QueryHeatWaterTemp", 0),
             ("QueryCoolWaterTemp", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AC-COM-MCQUAY-02S": {
-        "switches": [],
+        "name": "麦克维尔空调",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QueryMode", 0),
@@ -4972,19 +5031,30 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-MCQUAY-03": {
+        "name": "麦克维尔空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '热水': 'hotwater', '夏季自动': 'summerauto', '冬季自动': 'winterauto'}, ['制冷', '制热', '热水', '夏季自动', '冬季自动']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryHeatWaterTemp", 0),
             ("QueryCoolWaterTemp", 0),
             ("QueryHotWaterTemp", 0),
         ],
     },
     "RL-AC-COM-MCQUAY-03S": {
-        "switches": [],
+        "name": "麦克维尔空调",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QueryMode", 0),
@@ -4994,11 +5064,16 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-THERMOPLUS-01": {
+        "name": "迪莫空气源热泵",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'auto': 'auto', 'cool': 'cool', 'heat': 'heat', 'hotwater': 'hotwater', 'cool+hotwater': 'cool+hotwater', 'heat+hotwater': 'heat+hotwater'}, ['auto', 'cool', 'heat', 'hotwater', 'cool+hotwater', 'heat+hotwater']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryHeatWaterSetTemp", 0),
@@ -5044,13 +5119,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TOYOSAN-01": {
+        "name": "东洋桑供水主机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 5.0, 25.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 30.0, 50.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryCoolTempOffsetRange", 0),
             ("QueryEnvTemp", 0),
             ("QueryUseSideInletWaterTemp", 0),
@@ -5070,7 +5150,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TOYOSAN-01-S": {
-        "switches": [],
+        "name": "东洋桑供水主机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -5095,7 +5181,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TRANE-01": {
-        "switches": [],
+        "name": "特灵变频协议转换器外机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QueryMode", 0),
@@ -5108,13 +5200,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TRANE-04": {
+        "name": "特灵辐射热泵主机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "温度", 5.0, 25.0, UnitOfTemperature.CELSIUS),
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "温度", 30.0, 55.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryEnvTemp", 0),
             ("QueryInletWaterTemp", 0),
             ("QueryOutletWaterTemp", 0),
@@ -5122,13 +5219,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TRANE-04-S": {
+        "name": "特灵辐射热泵从机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "温度", 5.0, 25.0, UnitOfTemperature.CELSIUS),
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "温度", 30.0, 55.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryEnvTemp", 0),
             ("QueryInletWaterTemp", 0),
             ("QueryOutletWaterTemp", 0),
@@ -5136,16 +5238,27 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TRANE-05": {
+        "name": "特灵CXAJ网关",
         "switches": [
             ("Mode", "QueryMode", 0, "运行模式"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 60.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-AC-COM-TRANE-05-S": {
-        "switches": [],
+        "name": "特灵CXAJ网关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -5169,12 +5282,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TROX-01": {
-        "switches": [],
+        "name": "妥思热泵主机",
+        "switches": [
+        ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 5.0, 20.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 30.0, 55.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'停止': 'stop', '制冷': 'cool', '制热': 'heat'}, ['停止', '制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRunMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryEnergySavingMode", 0),
             ("QueryMuteMode", 0),
             ("QueryHeatPumpTemp", 0),
@@ -5200,7 +5319,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-TROX-01-S": {
-        "switches": [],
+        "name": "妥思热泵从机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryMode", 0),
             ("QueryRunMode", 0),
@@ -5231,21 +5356,39 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-UR-01": {
-        "switches": [],
+        "name": "空调网关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryMachineNumbe", 0),
             ("QueryMachineLinkStat", 0),
         ],
     },
     "RL-AC-COM-UR-02": {
-        "switches": [],
+        "name": "中弘空调网关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryMachineNumbe", 0),
             ("QueryMachineLinkStat", 0),
         ],
     },
     "RL-AC-COM-VAILLANT-01": {
-        "switches": [],
+        "name": "威能两联供空调外机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryFaultStat", 0),
             ("QueryErrCode", 0),
@@ -5257,8 +5400,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-VAILLANT-02": {
+        "name": "水机空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySystemStat", 0),
@@ -5275,20 +5423,31 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-VAILLANT-02-S": {
-        "switches": [],
+        "name": "威能aroTHEMR空调外机模块",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
         ],
     },
     "RL-AC-COM-WFI-01": {
+        "name": "沃富VKC地源热泵",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("HotWaterSetTemp", "QueryHotWaterSetTemp", 0, "热水设定温度", 35.0, 50.0, UnitOfTemperature.CELSIUS),
+            ("CoolBackwardTemp", "QueryCoolBackwardTemp", 0, "制冷回水温度", 10.0, 25.0, UnitOfTemperature.CELSIUS),
+            ("HeatBackwardTemp", "QueryHeatBackwardTemp", 0, "制热回水温度", 20.0, 41.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '制热+热水': 'heat+hotwater', '制冷+热水': 'cool+hotwater', '热水': 'hotwater'}, ['制冷', '制热', '制热+热水', '制冷+热水', '热水']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryHotWaterSetTemp", 0),
-            ("QueryCoolBackwardTemp", 0),
-            ("QueryHeatBackwardTemp", 0),
             ("QueryUseSideSwitch", 0),
             ("QueryHotSourceSwitch", 0),
             ("QueryHotWaterSwitch", 0),
@@ -5315,8 +5474,14 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-COM-YORK-01": {
+        "name": "约克空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '制冷+快速热水': 'cool+quickhot', '制热+快速热水': 'heat+quickhot', '制冷+普通热水': 'cool+normalhot', '制热+普通热水': 'heat+normalhot', '快速热水': 'quickhot', '普通热水': 'normalhot', '水泵循环': 'pumploop'}, ['制冷', '制热', '制冷+快速热水', '制热+快速热水', '制冷+普通热水', '制热+普通热水', '快速热水', '普通热水', '水泵循环']),
         ],
         "sensors": [
             ("QuerySystemBackTemp", 0),
@@ -5325,17 +5490,21 @@ DEVICE_CAPABILITIES = {
             ("QueryEnvTemp", 0),
             ("QueryLoad", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AC-COM-ZGOUTES-01": {
+        "name": "中广两联供空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 18.0, 30.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 15.0, 27.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryOutletWaterTemp", 0),
             ("QueryBackwardTemp", 0),
             ("QueryDefrostMode", 0),
@@ -5345,7 +5514,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-NET-UR-01": {
-        "switches": [],
+        "name": "空调网关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryACLinkStat", 0),
             ("QueryMachineNumbe", 0),
@@ -5353,39 +5528,55 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-ZB-LF-01": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 16.0, 32.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
             ("QueryChildLock", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QuerySensorSelect", 0),
         ],
     },
     "RL-AC-ZB-LF-02": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 16.0, 32.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QuerySensorSelect", 0),
         ],
     },
     "RL-AC-ZB-UR-01": {
-        "switches": [],
+        "name": "空调网关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryACLinkStat", 0),
             ("QueryMachineNumbe", 0),
@@ -5393,7 +5584,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AC-ZB-UR-02": {
-        "switches": [],
+        "name": "多合一空调网关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryACLinkStat", 0),
             ("QueryMachineNumbe", 0),
@@ -5401,52 +5598,72 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACD-COM-AIRCONOMY-01": {
+        "name": "艾克诺米交流空调温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 10.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan'}, ['制冷', '制热', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
     "RL-ACD-COM-AIRCONOMY-02": {
+        "name": "艾克诺米直流空调温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 10.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan'}, ['制冷', '制热', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
     "RL-ACD-COM-CARRIER-01": {
+        "name": "开利空调内机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 1.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry'}, ['制冷', '制热', '送风', '除湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryLockFunction", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-ACD-COM-CLIMAVENETA-01": {
+        "name": "克莱门特内机风盘",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['自动', '制冷', '制热', '送风', '除湿', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '超低速': 'llow', '低速': 'low', '中低速': 'mlow', '中速': 'medium', '中高速': 'mhigh', '高速': 'high'}, ['自动', '超低速', '低速', '中低速', '中速', '中高速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryWorkMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryBackAirTemp", 0),
@@ -5462,24 +5679,34 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACD-COM-DMR-01": {
+        "name": "中央空调线控器网关",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-COM-HPD-01": {
+        "name": "吸顶卡机空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry'}, ['自动', '制冷', '制热', '送风', '除湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QuerySleepMode", 0),
             ("QuerySwingAngle", 0),
             ("QueryRoomTemp", 0),
@@ -5493,29 +5720,39 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACD-COM-HY-01": {
+        "name": "鸿雁空调模块",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
         ],
     },
     "RL-ACD-COM-SINKO-01": {
+        "name": "新晃空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("SleepMode", "QuerySleepMode", 0, "睡眠"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 45.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '送风': 'fan'}, ['自动', '制冷', '制热', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5'}, ['自动', '1', '2', '3', '4', '5']),
         ],
         "sensors": [
             ("QueryKeyLock", 0),
             ("QueryRemoteLock", 0),
             ("QueryTempLock", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryTempOffset", 0),
             ("QueryDiffAdjust", 0),
             ("QueryFanStop", 0),
@@ -5528,58 +5765,83 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACD-COM-XL-01": {
+        "name": "喜乐直流无刷面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'夏季模式': 'summer', '冬季模式': 'winter', '通风模式': 'fan'}, ['夏季模式', '冬季模式', '通风模式']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '停止': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '停止', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-ZB-HY-01": {
+        "name": "瑞灵空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 32.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-ZB-HY-02": {
+        "name": "鸿雁空调温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
         ],
     },
     "RL-ACD-ZB-LF-01": {
+        "name": "空调温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan'}, ['制冷', '制热', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-ZB-RY-01": {
+        "name": "空调伴侣",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 17.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry'}, ['自动', '制冷', '制热', '送风', '除湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryBackLightMode", 0),
             ("QueryAuxiliaryHeat", 0),
             ("QueryEnergySavingMode", 0),
@@ -5593,7 +5855,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACM-COM-LF-01": {
-        "switches": [],
+        "name": "拉菲多合一温控器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("Mode", 0),
             ("QueryTempCali", 0),
@@ -5613,7 +5881,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACM-ZB-LF-01": {
-        "switches": [],
+        "name": "拉菲多合一温控器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("Mode", 0),
             ("QueryTempCali", 0),
@@ -5634,183 +5908,238 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACP-COM-EMERSON-01": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-01-RT5112PA": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3'}, ['自动', '1档', '2档', '3档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-01-RT5130PA": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-01-RT61": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-01-RT81": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-02": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-02-RT5112PA": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3'}, ['自动', '1档', '2档', '3档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-02-RT5130PA": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-02-RT61": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-EMERSON-02-RT81": {
+        "name": "艾默生面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
     "RL-ACP-COM-LF-01-A": {
+        "name": "变风量空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -5820,14 +6149,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACP-COM-LF-01-C": {
+        "name": "直流风盘",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan'}, ['制冷', '制热', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -5840,13 +6174,20 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACP-COM-LF-01-D": {
+        "name": "地辐射+直流风盘",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat', '制冷+地冷': 'cool+floorcool', '地冷': 'floorcool'}, ['制冷', '制热', '送风', '地暖', '制热+地暖', '制冷+地冷', '地冷']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -5858,30 +6199,39 @@ DEVICE_CAPABILITIES = {
             ("QueryACCloseTempOffset", 0),
             ("QueryFHOpenTempOffset", 0),
             ("QueryFHCloseTempOffset", 0),
-            ("QueryFanSpeed", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
     "RL-ACP-COM-LF-01-TP4": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 45.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryWorkMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QuerySetTempUpperLimit", 0),
             ("QuerySetTempLowerLimit", 0),
         ],
     },
     "RL-ACP-COM-LF-02-A": {
+        "name": "变风量空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -5894,194 +6244,282 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACP-COM-MCQUAY-01": {
+        "name": "麦克维尔面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat'}, ['自动', '制冷', '制热', '除湿', '送风', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'超低速': '1', '低速': '2', '中低速': '3', '中速': '4', '中高速': '5', '高速': '6', '超高速': '7'}, ['超低速', '低速', '中低速', '中速', '中高速', '高速', '超高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-30": {
+        "name": "麦克维尔面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat'}, ['自动', '制冷', '制热', '除湿', '送风', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': '2', '中速': '4', '高速': '6'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-40": {
+        "name": "麦克维尔面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat'}, ['自动', '制冷', '制热', '除湿', '送风', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': '2', '中速': '4', '高速': '6', '超高速': '7'}, ['低速', '中速', '高速', '超高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-41": {
+        "name": "麦克维尔面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat'}, ['自动', '制冷', '制热', '除湿', '送风', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'超低速': '1', '低速': '2', '中速': '4', '高速': '6'}, ['超低速', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-50": {
+        "name": "麦克维尔面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat'}, ['自动', '制冷', '制热', '除湿', '送风', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'超低速': '1', '低速': '2', '中速': '4', '高速': '6', '超高速': '7'}, ['超低速', '低速', '中速', '高速', '超高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-B320": {
+        "name": "麦克维尔面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat'}, ['自动', '制冷', '制热', '除湿', '送风', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '静音': 'mute', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '静音', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-D330": {
+        "name": "麦克维尔面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat'}, ['自动', '制冷', '制热', '除湿', '送风', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '静音': 'mute', '低速': 'low', '中速': 'medium', '高速': 'high', '超高速': 'hhigh'}, ['自动', '静音', '低速', '中速', '高速', '超高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MEC-01": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 31.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['自动', '制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速1': 'medium1', '中速2': 'medium2', '高速': 'high'}, ['自动', '低速', '中速1', '中速2', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryVane", 0),
             ("QueryLouver", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-TRANE-01": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("FanValve", "QueryFanValve", 0, "新风阀"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 45.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '智能地暖': 'smartfloorheat'}, ['自动', '制冷', '制热', '送风', '除湿', '地暖', '智能地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低': 'low', '中': 'medium', '高': 'high'}, ['自动', '低', '中', '高']),
+        ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-TRANE-02": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 45.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'自动': 'auto', '制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '智能地暖': 'smartfloorheat'}, ['自动', '制冷', '制热', '送风', '除湿', '地暖', '智能地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低': 'low', '中': 'medium', '高': 'high'}, ['自动', '低', '中', '高']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-TRANE-03": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 45.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '智能地暖': 'smartfloorheat'}, ['制冷', '制热', '送风', '除湿', '地暖', '智能地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低': 'low', '中': 'medium', '高': 'high'}, ['自动', '低', '中', '高']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-UR-01": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-UR-02": {
+        "name": "中弘空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'超低': 'llow', '低': 'low', '中': 'medium', '高': 'high', '超高': 'hhigh'}, ['超低', '低', '中', '高', '超高']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-VAILLANT-01": {
+        "name": "威能两联供空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低': 'low', '中': 'medium', '高': 'high'}, ['自动', '低', '中', '高']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-YORK-01": {
+        "name": "约克空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("MuteMode", "QueryMuteMode", 0, "静音模式"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '通风', '地暖', '制热+地暖']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-YORK-02": {
+        "name": "约克空调",
         "switches": [
             ("MuteMode", "QueryMuteMode", 0, "静音模式"),
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '6': 'level6', '7': 'level7', '8': 'level8', '9': 'level9', '10': 'level10'}, ['自动', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '通风', '除湿', '地暖', '制热+地暖']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-ZGVRV-01": {
+        "name": "中广多联机空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'自动': 'auto', '制冷': 'cool', '送风': 'fan', '除湿': 'dry', '制热': 'heat', '地暖': 'floorheat'}, ['自动', '制冷', '送风', '除湿', '制热', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'超低速': 'llow', '低速': 'low', '中速': 'medium', '高速': 'high', '超高速': 'hhigh'}, ['超低速', '低速', '中速', '高速', '超高速']),
         ],
         "sensors": [
             ("QueryCommStat", 0),
@@ -6096,124 +6534,171 @@ DEVICE_CAPABILITIES = {
             ("QueryAirRegulation", 0),
             ("QueryFloorHeatMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryDirectionCtrl", 0),
         ],
     },
     "RL-ACP-GW-UR-01": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-NET-UR-01": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'超低': 'llow', '低': 'low', '中': 'medium', '高': 'high', '超高': 'hhigh'}, ['超低', '低', '中', '高', '超高']),
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-ALL": {
+        "name": "日立空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-DK": {
+        "name": "大金空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-GE": {
+        "name": "格力空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-HT": {
+        "name": "日立空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-TS": {
+        "name": "东芝空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01P-GE": {
+        "name": "格力空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
         ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-ZB-HY-03": {
+        "name": "水空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 32.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-ZB-LF-01-A": {
+        "name": "变风量空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6223,14 +6708,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACP-ZB-LF-01-C": {
+        "name": "直流风盘",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan'}, ['制冷', '制热', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6243,13 +6733,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ACP-ZB-LF-01-D": {
+        "name": "地辐射+直流风盘",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat', '制冷+地冷': 'cool+floorcool', '地冷': 'floorcool'}, ['制冷', '制热', '送风', '地暖', '制热+地暖', '制冷+地冷', '地冷']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6261,140 +6757,194 @@ DEVICE_CAPABILITIES = {
             ("QueryACCloseTempOffset", 0),
             ("QueryFHOpenTempOffset", 0),
             ("QueryFHCloseTempOffset", 0),
-            ("QueryFanSpeed", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
     "RL-ACP-ZB-LF-04-A": {
+        "name": "水机空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("QueryMode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan'}, ['制冷', '制热', '送风']),
+            ("QueryFanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-ACP-ZB-UR-01": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-ZB-UR-02": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 18.0, 28.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-AFD-COM-AIRCONOMY-01": {
+        "name": "艾克诺米交流空调地暖温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 10.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '空调+地暖': 'ac+floorheat', '地暖': 'floorheat'}, ['制冷', '制热', '送风', '空调+地暖', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
     "RL-AFD-COM-AIRCONOMY-02": {
+        "name": "艾克诺米直流空调地暖温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 10.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '空调+地暖': 'ac+floorheat', '地暖': 'floorheat'}, ['制冷', '制热', '送风', '空调+地暖', '地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
     "RL-AFD-COM-CARRIER-02": {
+        "name": "开利空调地暖内机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 1.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '地暖+制热': 'heat+floorheat'}, ['制冷', '制热', '送风', '除湿', '地暖', '地暖+制热']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryLockFunction", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-AFD-COM-DOAS-01": {
+        "name": "DOAS温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热温度", 5.0, 50.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 35.0, 65.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan'}, ['制冷', '制热', '通风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动风': 'auto', '低速': 'low', '中速': 'medium', '次高速': 'subhigh', '高速': 'high', '极高速': 'exthigh', '强劲': 'power', '停止': 'stop'}, ['自动风', '低速', '中速', '次高速', '高速', '极高速', '强劲', '停止']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidityControl", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
         ],
     },
     "RL-AFD-COM-EMMETI-01": {
+        "name": "天水地水二合一面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 15.0, 32.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '采暖': 'heat', '通风': 'fan', '节能': 'eco'}, ['制冷', '采暖', '通风', '节能']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2'}, ['自动', '1档', '2档']),
         ],
         "sensors": [
             ("QueryTemp", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-EMMETI-02": {
+        "name": "玻玛两联供面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("CoolSetTemp", "QueryCoolSetTemp", 0, "制冷设定温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+            ("HeatSetTemp", "QueryHeatSetTemp", 0, "制热设定温度", 5.0, 50.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
         ],
     },
     "RL-AFD-COM-FRD-01": {
+        "name": "佛瑞德空调温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 10.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '地暖+制热': 'floorheat+heat'}, ['制冷', '制热', '送风', '地暖', '地暖+制热']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-KM-01": {
+        "name": "科迈905温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 10.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QuerySetTemp", 0),
             ("QueryFanSpeed", 0),
             ("QueryMode", 0),
             ("QueryMode/ac/fh", 0),
@@ -6408,13 +6958,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AFD-COM-OKONOFF-01": {
+        "name": "柯耐弗两联供面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'floorheat+heat'}, ['制冷', '制热', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryFloorHeatValve", 0),
@@ -6422,11 +6977,16 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AFD-COM-OLD-01": {
+        "name": "欧龙德五恒系统",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QuerySetTemp", 0),
             ("QueryRunMode", 0),
             ("QueryConstantTempCtrl", 0),
@@ -6441,17 +7001,22 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AFD-COM-SINKO-01": {
+        "name": "新晃两联供面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 45.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '自动制冷': 'autocool', '自动制热': 'autoheat', '快速制冷': 'quickcool', '快速制热': 'quickheat'}, ['制冷', '制热', '送风', '地暖', '自动制冷', '自动制热', '快速制冷', '快速制热']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5'}, ['自动', '1', '2', '3', '4', '5']),
         ],
         "sensors": [
             ("QueryKeyLock", 0),
             ("QueryRemoteLock", 0),
             ("QueryTempLock", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryTempOffset", 0),
             ("QueryDiffAdjust", 0),
             ("QueryFanStop", 0),
@@ -6466,8 +7031,16 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AFD-COM-UR-01": {
+        "name": "全空气地辐射二合一面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat', '地冷': 'floorcool', '制冷+地冷': 'cool+floorcool'}, ['制冷', '制热', '地暖', '制热+地暖', '地冷', '制冷+地冷']),
+            ("KeyLock", "QueryKeyLock", 0, "锁定", {'锁定': 'lock', '解锁': 'unlock'}, ['锁定', '解锁']),
         ],
         "sensors": [
             ("QueryHeatStat", 0),
@@ -6478,16 +7051,22 @@ DEVICE_CAPABILITIES = {
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
             ("QueryFanSpeed", 0),
-            ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryValveMinOpening", 0),
             ("QueryValveMaxOpening", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-UR-02": {
+        "name": "天水地水二合一面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat', '地冷': 'floorcool', '制冷+地冷': 'cool+floorcool'}, ['制冷', '制热', '通风', '地暖', '制热+地暖', '地冷', '制冷+地冷']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'停止': 'stop', '自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['停止', '自动', '1档', '2档', '3档', '4档', '5档']),
+            ("KeyLock", "QueryKeyLock", 0, "锁定", {'锁定': 'lock', '解锁': 'unlock'}, ['锁定', '解锁']),
         ],
         "sensors": [
             ("QueryHeatStat", 0),
@@ -6497,22 +7076,23 @@ DEVICE_CAPABILITIES = {
             ("QueryFHOpenOffset", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryValveMinOpening", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-UR-03": {
+        "name": "智能五恒温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '地冷': 'floorcool', '制热+地暖': 'heat+floorheat', '制冷+地冷': 'cool+floorcool'}, ['制冷', '制热', '送风', '除湿', '地暖', '地冷', '制热+地暖', '制冷+地冷']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRunMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryFanSpeed", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6542,13 +7122,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AFD-COM-UR-04": {
+        "name": "智能五恒温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '地冷': 'floorcool', '制热+地暖': 'heat+floorheat', '制冷+地冷': 'cool+floorcool'}, ['制冷', '制热', '送风', '除湿', '地暖', '地冷', '制热+地暖', '制冷+地冷']),
+        ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryFanSpeed", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6574,38 +7159,63 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AFD-COM-XL-01": {
+        "name": "喜乐交流两联供面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high', '停止': 'stop'}, ['自动', '低速', '中速', '高速', '停止']),
+            ("QueryChildLock", "QueryChildLock", 0, "童锁", {'锁定': 'lock', '解锁': 'unlock'}, ['锁定', '解锁']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryCoolHeatSourceStat", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryChildLock", 0),
         ],
     },
     "RL-AFD-COM-XL-02": {
+        "name": "喜乐直流两联供面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high', '停止': 'stop'}, ['自动', '低速', '中速', '高速', '停止']),
+            ("ChildLock", "QueryChildLock", 0, "童锁", {'锁定': 'lock', '解锁': 'unlock'}, ['锁定', '解锁']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryCoolHeatSourceStat", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryChildLock", 0),
         ],
     },
     "RL-AFD-ZB-LF-01": {
-        "switches": [],
-        "sensors": [],
+        "name": "大金空调地暖二合一面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-AFD-ZB-UR-01": {
+        "name": "两联供面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '地暖+制热': 'floorheat+heat'}, ['制冷', '制热', '送风', '地暖', '地暖+制热']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
             ("VoiceSwitch", 0),
@@ -6617,26 +7227,28 @@ DEVICE_CAPABILITIES = {
             ("FHCloseTempOffset", 0),
             ("FHOpenTempOffset", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryWorkMode", 0),
             ("QueryHeatStat", 0),
             ("QueryWaterValve", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-ZB-XL-01": {
+        "name": "喜乐直流两联供面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("ChildLock", "QueryChildLock", 0, "童锁"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '送风', '地暖', '制热+地暖']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high', '停止': 'stop'}, ['自动', '低速', '中速', '高速', '停止']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryCoolHeatSourceStat", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
             ("QueryHeatStat", 0),
             ("QueryACVavle", 0),
             ("QueryWorkMode", 0),
@@ -6651,18 +7263,23 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-BEIANG-01": {
+        "name": "贝昂空调箱",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", 0.0, 99.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '加湿': 'humidify'}, ['制冷', '制热', '除湿', '送风', '加湿']),
+        ],
         "sensors": [
             ("QueryRunMode", 0),
-            ("QueryMode", 0),
             ("QuerySceneMode", 0),
             ("QueryAtHomeWinterSetTemp", 0),
             ("QueryAtHomeSummerSetTemp", 0),
             ("QueryLeaveHomeWinterSetTemp", 0),
             ("QueryLeaveHomeSummerSetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryDehumSetUp", 0),
             ("QueryHumidifySetUp", 0),
             ("QueryServiceTimeLimit", 0),
@@ -6680,14 +7297,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-BOYI-01": {
+        "name": "i温暖空气系统",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'自动模式': 'auto', '手动模式': 'manual'}, ['自动模式', '手动模式']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'停止': '0', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5'}, ['停止', '1档', '2档', '3档', '4档', '5档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QuerySecondaryPump", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
@@ -6708,14 +7330,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-DOAS-01": {
+        "name": "DOAS-VRV机组",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 50.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 35.0, 65.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan'}, ['制冷', '制热', '通风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动风': 'auto', '低速': 'low', '中速': 'medium', '次高速': 'subhigh', '高速': 'high', '极高速': 'exthigh', '强劲': 'power', '停止': 'stop'}, ['自动风', '低速', '中速', '次高速', '高速', '极高速', '强劲', '停止']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidityControl", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
@@ -6731,14 +7358,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-EMERSON-01": {
+        "name": "艾默生柜式空调箱",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryMode", 0),
             ("QueryMainMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryFloorVavle", 0),
             ("QueryHumidity", 0),
             ("QueryPM2.5", 0),
@@ -6747,14 +7379,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-EMERSON-02": {
+        "name": "艾默生柜式空调箱",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryMode", 0),
             ("QueryMainMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryFloorVavle", 0),
             ("QueryHumidity", 0),
             ("QueryPM2.5", 0),
@@ -6763,7 +7400,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-MECO-01": {
-        "switches": [],
+        "name": "米珂空调箱",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QuerySetTemp", 0),
@@ -6791,15 +7434,20 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-TRANE-01": {
+        "name": "特灵空调箱",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 35.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 40.0, 90.0, PERCENTAGE),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryFanSpeed", 0),
             ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QuerySetEnvTemp", 0),
             ("QueryFloorVavle", 0),
             ("QueryFanValve", 0),
@@ -6814,7 +7462,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-COM-TROX-01": {
-        "switches": [],
+        "name": "空调箱",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QuerySystemStartStop", 0),
@@ -6888,7 +7542,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-AHU-NET-TROX-01": {
-        "switches": [],
+        "name": "空调箱",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QuerySystemStartStop", 0),
@@ -6962,11 +7622,24 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-BG-ZB-UR-E": {
-        "switches": [],
-        "sensors": [],
+        "name": "中继模块",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-BOILER-COM-VAIILANT-01": {
-        "switches": [],
+        "name": "威能壁挂炉控制器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryLink", 0),
             ("QueryHeatSwitch", 0),
@@ -6979,7 +7652,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-BOILER-LORA-UR-01": {
-        "switches": [],
+        "name": "壁挂炉控制器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryHotWaterSwitch", 0),
             ("QueryBoilerDataReady", 0),
@@ -7025,7 +7704,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-BOILER-WIFI-UR-01": {
-        "switches": [],
+        "name": "WIFI壁挂炉线控器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QuerySwitch", 0),
@@ -7052,7 +7737,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-BOILER-WIFI-UR-02": {
-        "switches": [],
+        "name": "WIFI壁挂炉线控器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryContentDeviceType", 0),
             ("QueryErrCode", 0),
@@ -7089,7 +7780,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-BOILER-WIFI-UR-03": {
-        "switches": [],
+        "name": "阿里斯顿壁挂炉",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryContentDeviceType", 0),
             ("QueryErrCode", 0),
@@ -7126,8 +7823,15 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-BOILER-WIFI-UR-04": {
+        "name": "插座WiFi温控网关",
         "switches": [
             ("ChildLock", "ChildLock", 0, "童锁"),
+        ],
+        "numbers": [
+            ("SetTemp", "SetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("LinkType", "LinkType", 0, "联动类型", {'无': 'off', '外置': 'inside', '内置': 'outside'}, ['无', '外置', '内置']),
         ],
         "sensors": [
             ("QueryShowMe", 0),
@@ -7140,12 +7844,17 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-FE-01": {
+        "name": "芬尔酒窖除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '高速': 'high'}, ['低速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
             ("QueryFanValve", 0),
@@ -7155,12 +7864,17 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-FE-02": {
+        "name": "芬尔中央除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '高速': 'high'}, ['低速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
             ("QueryPipeSetHumidity", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
@@ -7177,12 +7891,17 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-PANASONIC-01": {
+        "name": "松下新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'睡眠': 'sleep', '低速': 'low', '高速': 'high'}, ['睡眠', '低速', '高速']),
+        ],
         "sensors": [
             ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryPM2.5MeshPeriod", 0),
             ("QuerySetHumidity", 0),
             ("QueryRoomTemp", 0),
@@ -7196,16 +7915,21 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-SIMN-01": {
+        "name": "西蒙全热除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 30.0, 90.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'内循环除湿': 'interloopdry', '新风': 'fa', '新风除湿': 'fa+dehum', '内循环': 'interloop'}, ['内循环除湿', '新风', '新风除湿', '内循环']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'关闭': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['关闭', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryMeshUsedTime", 0),
-            ("QuerySetHumidity", 0),
             ("QueryFanValve", 0),
             ("QueryChildLock", 0),
             ("QueryUVLight", 0),
@@ -7220,8 +7944,16 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-SJ-01": {
+        "name": "松井除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 20.0, 90.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'除湿': 'dry', '净化': 'purge', '通风': 'fan', '智能': 'intelligence'}, ['除湿', '净化', '通风', '智能']),
         ],
         "sensors": [
             ("QueryPM2.5", 0),
@@ -7232,41 +7964,48 @@ DEVICE_CAPABILITIES = {
             ("QueryFAHumidity", 0),
             ("QueryBackTemp", 0),
             ("QueryBackHumidity", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryMode", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-DH-COM-ST-01": {
+        "name": "湿腾除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'新风': 'fa', '内通风': 'intervent', '内除湿': 'interdehum', '新风+除湿': 'fa+dehum'}, ['新风', '内通风', '内除湿', '新风+除湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'停止': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['停止', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryPM2.5", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
             ("QueryCoolerTemp", 0),
             ("QueryTemp", 0),
             ("QueryHumidity", 0),
-            ("QueryMode", 0),
             ("QueryOPMode", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-DH-COM-ST-02": {
+        "name": "湿腾E系列除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 30.0, 95.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'内通风': 'intervent', '内除湿': 'interdehum', '新风': 'fa', '新风+除湿': 'fa+dehum'}, ['内通风', '内除湿', '新风', '新风+除湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high', '关闭': 'close'}, ['低速', '中速', '高速', '关闭']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRunMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryInterTemp", 0),
             ("QueryHumidity", 0),
-            ("QuerySetHumidity", 0),
             ("QueryDehumOffset", 0),
             ("QueryMeshExpireTime", 0),
             ("QueryTimingSwitch", 0),
@@ -7288,8 +8027,14 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-TIFENGRENZ-01": {
+        "name": "蒂芬格恩除湿净氧机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryCO2", 0),
@@ -7299,12 +8044,16 @@ DEVICE_CAPABILITIES = {
             ("QueryHumidity", 0),
             ("QueryOPMode", 0),
             ("QueryFanValve", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-DH-COM-TOYOSAN-01": {
+        "name": "全新风高分子转轮调湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryErrCode", 0),
@@ -7324,8 +8073,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-TOYOSAN-02": {
+        "name": "双冷源全新风高分子转轮除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryErrCode", 0),
@@ -7346,8 +8100,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-TOYOSAN-03": {
+        "name": "双冷源全新风高分子转轮除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryErrCode", 0),
@@ -7377,13 +8136,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-TOYOSAN-04": {
+        "name": "全空气转轮调湿直膨机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'自动': 'auto', '夏季': 'summer', '冬季': 'winter', '送风': 'fan', '回南天': 'rainy'}, ['自动', '夏季', '冬季', '送风', '回南天']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryWorkRunMode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryRunStat", 0),
             ("QueryImportTemp", 0),
@@ -7399,13 +8163,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-TOYOSAN-05": {
+        "name": "全空气转轮调湿直膨机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'自动': 'auto', '夏季': 'summer', '冬季': 'winter', '送风': 'fan', '回南天': 'rainy'}, ['自动', '夏季', '冬季', '送风', '回南天']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryWorkRunMode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryRunStat", 0),
             ("QueryImportTemp", 0),
@@ -7421,13 +8190,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-COM-WOLF-01": {
+        "name": "沃乐夫",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 30.0, 90.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+            ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '关闭': 'close', '手动': 'manual', '内循环': 'intloop', '新风除湿': 'fa+dehum', '内循环除湿': 'interloopdry', '定时': 'timing'}, ['自动', '关闭', '手动', '内循环', '新风除湿', '内循环除湿', '定时']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryMode", 0),
             ("QueryHumidity", 0),
             ("QueryAntiFrezzeProtect", 0),
             ("QueryDefrostMode", 0),
@@ -7435,8 +8209,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-NET-TOYOSAN-01": {
+        "name": "全新风高分子转轮调湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryErrCode", 0),
@@ -7456,8 +8235,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DH-NET-TOYOSAN-02": {
+        "name": "双冷源全新风高分子转轮除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryErrCode", 0),
@@ -7477,38 +8261,65 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-DI-COM-CORX-01": {
-        "switches": [],
+        "name": "36路数字输入模块",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryDigitalInput", 0),
         ],
     },
     "RL-DIDO-COM-CORX-01": {
-        "switches": [],
+        "name": "8路数字IO模块",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryDigitalInput", 0),
         ],
     },
     "RL-DIMC-ZB-LF-01": {
+        "name": "调光面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("ColorTemp", "QueryColorTemp", 0, "设定色温", 5.0, 99.0, None),
+            ("Brightness", "QueryBrightness", 0, "设定亮度", 15.0, 100.0, None),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QueryColorTemp", 0),
-            ("QueryBrightness", 0),
         ],
     },
     "RL-DIMC-ZB-RY-01": {
+        "name": "调光驱动器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("Brightness", "QueryBrightness", 0, "设定亮度", 15.0, 100.0, None),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QueryBrightness", 0),
         ],
     },
     "RL-DLQ-COM-UR-01": {
+        "name": "计量漏电断路器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryConsumption", 0),
@@ -7520,15 +8331,26 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ECV-COM-ZXZ-01": {
+        "name": "众鑫泽电动调节阀",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryOutletWaterTemp", 0),
         ],
     },
     "RL-ES-COM-HL-01": {
-        "switches": [],
+        "name": "Ate室内环境传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryVOC", 0),
             ("QueryPM2.5Level", 0),
@@ -7540,7 +8362,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ES-COM-UR-01": {
-        "switches": [],
+        "name": "环境传感器4合1",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryDewPointTemp", 0),
             ("QueryTemp", 0),
@@ -7554,7 +8382,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ES-ZB-HY-03": {
-        "switches": [],
+        "name": "环境传感器4合1",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryTemp", 0),
             ("QueryPM2.5", 0),
@@ -7564,7 +8398,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ES-ZB-RY-01": {
-        "switches": [],
+        "name": "3合一环境传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryTemp", 0),
             ("QueryCO2", 0),
@@ -7572,7 +8412,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ES-ZB-UR-01": {
-        "switches": [],
+        "name": "环境传感器5合1",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryTemp", 0),
             ("QueryCH2O", 0),
@@ -7583,7 +8429,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-ES-ZB-UR-02": {
-        "switches": [],
+        "name": "环境传感器2合1",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryTemp", 0),
             ("QueryHumidity", 0),
@@ -7591,15 +8443,20 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-AERNOVA-01": {
+        "name": "艾诺瓦新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '内循环': 'intloop', '热回收': 'heatrecovery', '旁通': 'bypass'}, ['自动', '内循环', '热回收', '旁通']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
-            ("QuerySetHumidity", 0),
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryMeshExpire", 0),
@@ -7610,18 +8467,25 @@ DEVICE_CAPABILITIES = {
             ("QueryFAHumidity", 0),
             ("QueryAirSupplyHumidity", 0),
             ("QueryBackHumidity", 0),
+            ("QueryExhaustTemp", 0),
+            ("QueryPipeTemp", 0),
         ],
     },
     "RL-FA-COM-AIRCONOMY-01": {
+        "name": "艾克诺米空气处理机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", -40.0, 70.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+            ("SetFanDehum", "QuerySetFanDehum", 0, "除湿风机设定", 0.0, 100.0, PERCENTAGE),
+            ("SetFanRegen", "QuerySetFanRegen", 0, "再生风机设定", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'换气': 'fan', '除湿': 'dry', '加湿': 'humidify'}, ['换气', '除湿', '加湿']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySetFanDehum", 0),
-            ("QuerySetFanRegen", 0),
             ("QueryFreshAirImportTemp", 0),
             ("QueryFreshAirImportHumidity", 0),
             ("QueryFreshAirExportTemp", 0),
@@ -7635,29 +8499,46 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-ARW-01": {
+        "name": "艾尔文新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
-        "sensors": [],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-FA-COM-BEIANG-01": {
+        "name": "贝昂新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'除湿': 'dry', '内循环': 'intloop', '智能': 'intelligence'}, ['除湿', '内循环', '智能']),
         ],
         "sensors": [
             ("QueryFilterUsedTime", 0),
             ("QueryRoomTemp", 0),
             ("QueryDewPointTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryHumidity", 0),
             ("QueryCO2", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-FA-COM-DBN-01": {
-        "switches": [],
+        "name": "德贝纳新风除湿机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryMode", 0),
             ("QueryColdSetTemp", 0),
@@ -7670,15 +8551,20 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-ELECTROLUX-01": {
+        "name": "伊莱克斯新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", -20.0, 20.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'全热': 'fullhot', '内循环除湿': 'interloopdry', '全热除湿': 'fullhotdry', '自动': 'auto'}, ['全热', '内循环除湿', '全热除湿', '自动']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QuerySensorType", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryRoomTemp", 0),
             ("QueryMeshExpire", 0),
@@ -7697,13 +8583,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-EMMETI-01": {
+        "name": "新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "湿度", 30.0, 80.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'自动': 'auto', '新风循环': 'faloop', '内循环': 'intloop', '混风': 'mixair'}, ['自动', '新风循环', '内循环', '混风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'停止': 'stop', '1档': 'level1', '2档': 'level2', '3档': 'level3'}, ['停止', '1档', '2档', '3档']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryLoopRunTime", 0),
             ("QueryLoopPauseTime", 0),
@@ -7718,11 +8609,16 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-EMMETI-02": {
+        "name": "新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "湿度", 30.0, 80.0, PERCENTAGE),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QuerySetHumidity", 0),
             ("QueryPM2.5", 0),
             ("QueryCO2", 0),
             ("QueryVOC", 0),
@@ -7731,14 +8627,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-ESSENTEC-01": {
+        "name": "源知新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("DehumSetUp", "QueryDehumSetUp", 0, "除湿设定", 0.0, 100.0, PERCENTAGE),
+            ("HumidifySetUp", "QueryHumidifySetUp", 0, "加湿设定", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan', '除湿': 'dry', '通风加湿': 'fan+humidify', '制热加湿': 'heat+humidify'}, ['制冷', '制热', '通风', '除湿', '通风加湿', '制热加湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'0档': 'level0', '1档': 'level1', '2档': 'level2', '3档': 'level3'}, ['0档', '1档', '2档', '3档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryDehumSetUp", 0),
-            ("QueryHumidifySetUp", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
             ("QueryDewPointTemp", 0),
@@ -7747,8 +8648,14 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-ESSENTEC-01-S": {
+        "name": "源知新风除湿机风模块",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("AirSupplyTempSetUp", "AirSupplyTempSetUp", 0, "送风温度", 0.0, 100.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryFanSpeed", 0),
@@ -7768,12 +8675,17 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-FE-01": {
+        "name": "芬尔智能空气平衡器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '手动': 'manual', '定时': 'timing'}, ['自动', '手动', '定时']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'0档': '0', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6'}, ['0档', '1档', '2档', '3档', '4档', '5档', '6档']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
             ("QueryFilterMaxTime", 0),
@@ -7782,49 +8694,70 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-HDDJ-01": {
-        "switches": [],
+        "name": "恒大大金新风",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'关机': 'close', '自动': 'auto', '手动': 'manual', '定时': 'timing'}, ['关机', '自动', '手动', '定时']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9'}, ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']),
+        ],
         "sensors": [
             ("QueryMeshPercent", 0),
             ("QueryPM2.5", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-COM-HL-01": {
+        "name": "海林新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("LoopMode", "QueryLoopMode", 0, "循环模式", {'内循环': 'intloop', '外循环': 'extloop'}, ['内循环', '外循环']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high', '停止': 'stop'}, ['自动', '低速', '中速', '高速', '停止']),
         ],
         "sensors": [
             ("QueryVOC", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCO2", 0),
-            ("QueryLoopMode", 0),
             ("QueryMeshAlarm", 0),
             ("QueryPM2.5", 0),
             ("QueryTemp", 0),
         ],
     },
     "RL-FA-COM-HONEYWELL-01": {
+        "name": "霍尼韦尔新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("BypassVavle", "QueryBypassVavle", 0, "旁通阀"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryMeshExpire", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
             ("QueryAirQuality", 0),
         ],
     },
     "RL-FA-COM-HONEYWELL-02": {
+        "name": "霍尼韦尔HNW系列新风机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'新风模式': 'fa', '单送风': 'singleairsupply', '单排风': 'singleexhaust'}, ['新风模式', '单送风', '单排风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5', '6档': 'level6', '7档': 'level7'}, ['1档', '2档', '3档', '4档', '5档', '6档', '7档']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryMediumMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
@@ -7837,11 +8770,16 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-HONEYWELL-03": {
+        "name": "霍尼韦尔EFD系列新风机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'1档': 'level1', '2档': 'level2', '3档': 'level3'}, ['1档', '2档', '3档']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryMediumMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
@@ -7854,23 +8792,33 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-HONEYWELL-04": {
+        "name": "霍尼韦尔单向流新风机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryLeaveMode", 0),
             ("QueryMeshExpire1", 0),
             ("QueryMeshExpire2", 0),
         ],
     },
     "RL-FA-COM-HONEYWELL-05": {
+        "name": "霍尼韦尔单向流新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'关闭': 'close', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['关闭', '低速', '中速', '高速']),
+            ("Mode", "QueryMode", 0, "运行模式", {'关闭': 'close', '新风模式': 'fa', '自动模式': 'auto', '除湿模式': 'dry'}, ['关闭', '新风模式', '自动模式', '除湿模式']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
             ("QueryCompressorSwitch", 0),
@@ -7886,14 +8834,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-HONEYWELL-06": {
+        "name": "霍尼韦尔双向流新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("DehumSetUp", "QueryDehumSetUp", 0, "除湿设定", 50.0, 80.0, PERCENTAGE),
+            ("HumidifySetUp", "QueryHumidifySetUp", 0, "加湿设定", 25.0, 45.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '新风': 'fa', '除湿': 'dry', '加湿': 'humidify'}, ['自动', '新风', '除湿', '加湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
-            ("QueryDehumSetUp", 0),
-            ("QueryHumidifySetUp", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryMediumMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
@@ -7906,13 +8859,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-HONEYWELL-07": {
+        "name": "霍尼韦尔双向流全热新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 30.0, 80.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '新风': 'fa', '除湿': 'dry'}, ['自动', '新风', '除湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
-            ("QuerySetHumidity", 0),
             ("QueryOuterLoop", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
@@ -7922,12 +8880,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-KALAONI-01": {
+        "name": "卡洛尼新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 1.0, 99.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'除湿': 'dry', '制冷除湿': 'cool+dry', '制热除湿': 'heat+dry', '制冷加湿': 'cool+humidify', '制热加湿': 'heat+humidify', '加湿': 'humidify', '通风': 'fan'}, ['除湿', '制冷除湿', '制热除湿', '制冷加湿', '制热加湿', '加湿', '通风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['1档', '2档', '3档', '4档', '5档']),
+        ],
         "sensors": [
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QueryHumidification", 0),
             ("QueryFanValveAutoHumidity", 0),
             ("QueryRoomTemp", 0),
@@ -7936,10 +8901,8 @@ DEVICE_CAPABILITIES = {
             ("QueryOutdoorHumidity", 0),
             ("QueryDewPointTemp", 0),
             ("QueryMoistureContent", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFanValve", 0),
             ("QueryFanValveAutoFuction", 0),
-            ("QueryMode", 0),
             ("QueryRunTime", 0),
             ("QueryIntSensor", 0),
             ("QueryExtSensor", 0),
@@ -7949,8 +8912,14 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-LF-01-G": {
+        "name": "地辐射+直流风盘",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
@@ -7960,52 +8929,71 @@ DEVICE_CAPABILITIES = {
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-COM-MEC-01": {
+        "name": "新风面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速1': 'medium1', '中速2': 'medium2', '高速': 'high'}, ['自动', '低速', '中速1', '中速2', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-COM-MENRED-01": {
+        "name": "曼瑞德IST1801新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'节能': 'eco', '除霾': 'hazeremoval', '睡眠': 'sleep', '自动': 'auto'}, ['节能', '除霾', '睡眠', '自动']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryFilterAlarm", 0),
             ("QueryRoomTemp", 0),
             ("QueryMeshUsedTime", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryWindRoute", 0),
             ("QueryHumidity", 0),
         ],
     },
     "RL-FA-COM-NILAN-01": {
+        "name": "霍尼韦尔新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("BypassVavle", "QueryBypassVavle", 0, "旁通阀"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryChildLock", 0),
             ("QueryMeshExpire", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
         ],
     },
     "RL-FA-COM-NILAN-02": {
+        "name": "奈兰新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'内循环除湿': 'dehum', '新风除湿': 'fa+dehum', '新风': 'fa', '内循环净化': 'clean'}, ['内循环除湿', '新风除湿', '新风', '内循环净化']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryOPMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
             ("QuerySetHumidity", 0),
             ("QuerySetPM2.5", 0),
@@ -8019,7 +9007,15 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-NOAH-01": {
-        "switches": [],
+        "name": "百朗诺亚新风",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'关机': 'close', '新风': 'fa', '速净': 'quickclean', '舒适': 'comfort', '凉风': 'coldwind', '自动': 'auto'}, ['关机', '新风', '速净', '舒适', '凉风', '自动']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'0': '0', '1档': '1', '2档': '2', '3档': '3'}, ['0', '1档', '2档', '3档']),
+        ],
         "sensors": [
             ("QueryFilterAlarm", 0),
             ("QueryErrCode", 0),
@@ -8027,13 +9023,19 @@ DEVICE_CAPABILITIES = {
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFilterMaintenance", 0),
         ],
     },
     "RL-FA-COM-NOAH-02": {
-        "switches": [],
+        "name": "百朗诺亚PLUS新风",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'关机': 'close', '新风': 'fa', '速净': 'quickclean', '舒适': 'comfort', '凉风': 'coldwind', '自动': 'auto'}, ['关机', '新风', '速净', '舒适', '凉风', '自动']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'0': '0', '1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}, ['0', '1', '2', '3', '4', '5']),
+        ],
         "sensors": [
             ("QueryFilterAlarm", 0),
             ("QueryErrCode", 0),
@@ -8041,41 +9043,54 @@ DEVICE_CAPABILITIES = {
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFilterMaintenance", 0),
         ],
     },
     "RL-FA-COM-PANASONIC-01-B": {
+        "name": "松下全热交换器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'热交换': 'heatexchange', '普通': 'normal'}, ['热交换', '普通']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '高速': 'high'}, ['低速', '高速']),
+        ],
         "sensors": [
             ("QueryMeshLeftChangeTime", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-FA-COM-PANASONIC-01-F": {
+        "name": "松下全热交换器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'热交换': 'heatexchange', '内循环': 'innerloop', '外循环': 'exterloop'}, ['热交换', '内循环', '外循环']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryMeshLeftCleanTime", 0),
             ("QueryMeshLeftChangeTime", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-FA-COM-PANASONIC-01-FL": {
+        "name": "松下全热交换器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'热交换': 'heatexchange', '内循环': 'innerloop', '严寒模式': 'severecold'}, ['热交换', '内循环', '严寒模式']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryMeshLeftCleanTime", 0),
             ("QueryMeshLeftChangeTime", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryColdField", 0),
             ("QueryRoomTemp", 0),
             ("QueryOutdoorTemp", 0),
@@ -8083,16 +9098,21 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-SIMN-01": {
+        "name": "西蒙新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 30.0, 90.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'通风': 'fan', '除湿': 'dry'}, ['通风', '除湿']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'待机': 'idle', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['待机', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryMeshUsedTime", 0),
-            ("QuerySetHumidity", 0),
             ("QueryFanValve", 0),
             ("QueryChildLock", 0),
             ("QueryUVLight", 0),
@@ -8101,28 +9121,41 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-SMART-01": {
-        "switches": [],
+        "name": "百朗新风",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'关机': 'close', '换气': 'air', '排风': 'exhaust'}, ['关机', '换气', '排风']),
+            ("ExportSpeed", "QueryExportSpeed", 0, "排风风速", {'关闭': 'close', '低档': 'low', '中档': 'medium', '高档': 'high'}, ['关闭', '低档', '中档', '高档']),
+            ("ImportSpeed", "QueryImportSpeed", 0, "进风风速", {'关闭': 'close', '低档': 'low', '中档': 'medium', '高档': 'high'}, ['关闭', '低档', '中档', '高档']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
-            ("QueryMode", 0),
-            ("QueryImportSpeed", 0),
-            ("QueryExportSpeed", 0),
         ],
     },
     "RL-FA-COM-SMART-02": {
-        "switches": [],
+        "name": "百朗新风",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'关机': 'close', '换气': 'air', '排风': 'exhaust', '智能': 'intelligence', '强劲': 'powerful', '省电': 'eco'}, ['关机', '换气', '排风', '智能', '强劲', '省电']),
+            ("ExportSpeed", "QueryExportSpeed", 0, "排风风速", {'关闭': 'close', '低档': 'low', '中档': 'medium', '高档': 'high'}, ['关闭', '低档', '中档', '高档']),
+            ("ImportSpeed", "QueryImportSpeed", 0, "进风风速", {'关闭': 'close', '低档': 'low', '中档': 'medium', '高档': 'high'}, ['关闭', '低档', '中档', '高档']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
-            ("QueryMode", 0),
-            ("QueryImportSpeed", 0),
-            ("QueryExportSpeed", 0),
         ],
     },
     "RL-FA-COM-ST-01": {
+        "name": "湿腾新风机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("FanValve", "QueryFanValve", 0, "新风"),
@@ -8131,24 +9164,33 @@ DEVICE_CAPABILITIES = {
             ("Humidify", "QueryHumidify", 0, "加湿"),
             ("Anion", "QueryAnion", 0, "负离子"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '高速': 'high'}, ['低速', '高速']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryMeshUsedTime", 0),
             ("QueryCoilTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
             ("QueryFilterClean", 0),
             ("QueryHumidity", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-FA-COM-ST-02": {
+        "name": "湿腾ACR新风机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '睡眠': 'sleep', '手动': 'manual', '定时': 'timing'}, ['自动', '睡眠', '手动', '定时']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high', '关闭': 'close'}, ['低速', '中速', '高速', '关闭']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
             ("QueryMeshUsedTime", 0),
@@ -8162,15 +9204,20 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-TRANE-01": {
+        "name": "蔚格新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 22.0, 30.0, UnitOfTemperature.CELSIUS),
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 40.0, 90.0, PERCENTAGE),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'除湿': 'dry', '新风除湿': 'fa+dehum', '新风': 'fa', '净化': 'purge', '自动': 'auto'}, ['除湿', '新风除湿', '新风', '净化', '自动']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryHumidity", 0),
             ("QueryPM2.5", 0),
             ("QueryCO2", 0),
@@ -8183,72 +9230,104 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-VAILLANT-01": {
-        "switches": [],
+        "name": "威能intro",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'关机': 'close', '手动': 'manual', '自动': 'auto', '定时': 'timing'}, ['关机', '手动', '自动', '定时']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'停止': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['停止', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryMeshExpire", 0),
             ("QueryMeshLife", 0),
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryTemp", 0),
         ],
     },
     "RL-FA-COM-VAILLANT-02": {
-        "switches": [],
+        "name": "威能recoVAIRPro",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'关机': 'close', '低速': 'low', '高速': 'high', '内循环': 'loop'}, ['关机', '低速', '高速', '内循环']),
+        ],
         "sensors": [
             ("QueryPM2.5", 0),
-            ("QueryMode", 0),
             ("QueryOutdoorTemp", 0),
         ],
     },
     "RL-FA-COM-VORTICE-01": {
+        "name": "威特奇新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'手动': 'manual', '夜间': 'night', '假日': 'holiday'}, ['手动', '夜间', '假日']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'1档': '1', '2档': '2', '3档': '3'}, ['1档', '2档', '3档']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-FA-COM-VORTICE-02": {
+        "name": "威特奇新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'循环': 'loop', '循环除湿': 'loop+dehum', '混风': 'mixair', '混风除湿': 'mixair+dehum', '自动': 'auto', '夜间': 'night', '假日模式': 'holiday'}, ['循环', '循环除湿', '混风', '混风除湿', '自动', '夜间', '假日模式']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5'}, ['1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
             ("QueryPM2.5", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryFilterAlarm", 0),
             ("QueryTemp", 0),
         ],
     },
     "RL-FA-COM-VORTICE-03": {
+        "name": "威特奇HRC BLU",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'能量回收': 'energyrecovery', '新风': 'freshair', '单排风': 'singleexhaust', '自动': 'auto', '夜间': 'night', '假日': 'holiday', '定时': 'timing'}, ['能量回收', '新风', '单排风', '自动', '夜间', '假日', '定时']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'1档': '1', '2档': '2', '3档': '3', '4档': '4'}, ['1档', '2档', '3档', '4档']),
         ],
         "sensors": [
             ("QueryVOC", 0),
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryFilterAlarm", 0),
             ("QueryTemp", 0),
         ],
     },
     "RL-FA-COM-VORTICE-04": {
+        "name": "威特奇新风HR450",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'1档': '1', '2档': '2', '3档': '3', 'Boost': '4'}, ['1档', '2档', '3档', 'Boost']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
             ("QueryExportTemp", 0),
             ("QueryImportTemp", 0),
@@ -8256,16 +9335,21 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-WOLF-01": {
+        "name": "沃乐夫VM-1",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'睡眠': 'sleep', '自动': 'auto', '手动': 'manual', '定时': 'timing'}, ['睡眠', '自动', '手动', '定时']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'关闭': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['关闭', '低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryFilterTimeSet", 0),
             ("QueryVOC", 0),
             ("QueryPM2.5", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryFilterAlarm", 0),
             ("QueryTemp", 0),
@@ -8273,16 +9357,21 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-YAKE-01": {
+        "name": "亚克新风除湿机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("Purge", "QueryPurge", 0, "净化"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 1.0, 99.0, PERCENTAGE),
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 1.0, 99.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'除湿': 'dehum', '新风除湿': 'freshair+dehum', '新风': 'freshair'}, ['除湿', '新风除湿', '新风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '高速': 'high'}, ['自动', '低速', '高速']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QueryMeshExpire", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFanStat", 0),
             ("QueryCompressorStat", 0),
             ("QueryHumidity", 0),
@@ -8292,33 +9381,49 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-YORK-01": {
+        "name": "约克三速新风机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷鲜氧': 'cool', '制热鲜氧': 'heat', '通风净化': 'fan', '除湿': 'dry', '制热+加湿': 'heat+humidify', '强劲除湿': 'strongdehum', '制冷自动': 'autocool', '制热自动': 'autoheat'}, ['制冷鲜氧', '制热鲜氧', '通风净化', '除湿', '制热+加湿', '强劲除湿', '制冷自动', '制热自动']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
         ],
     },
     "RL-FA-COM-YORK-02": {
+        "name": "约克10档新风机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'制冷鲜氧': 'cool', '制热鲜氧': 'heat', '通风净化': 'fan', '除湿': 'dry', '制热+加湿': 'heat+humidify', '强劲除湿': 'strongdehum', '制冷自动': 'autocool', '制热自动': 'autoheat'}, ['制冷鲜氧', '制热鲜氧', '通风净化', '除湿', '制热+加湿', '强劲除湿', '制冷自动', '制热自动']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '6': 'level6', '7': 'level7', '8': 'level8', '9': 'level9', '10': 'level10'}, ['自动', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
         ],
     },
     "RL-FA-COM-YQX-01": {
-        "switches": [],
+        "name": "元气熊五恒一体机",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryMainFanVoltage1", 0),
             ("QueryMainFanVoltage2", 0),
@@ -8342,21 +9447,33 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FA-COM-ZEHNDER-01": {
+        "name": "森德新风S2",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'新风': 'fa', '旁通': 'bypass', '防冻': 'antifreeze', '时段': 'timeinterval', '睡眠': 'sleep'}, ['新风', '旁通', '防冻', '时段', '睡眠']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryFilterAlarm", 0),
             ("QueryExhaustAirFeedBack", 0),
             ("QueryAirSupplyFeedBack", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-COM-ZEHNDER-02": {
+        "name": "森德新风H1",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'新风': 'fa', '旁通': 'bypass', '防冻': 'antifreeze', '时段': 'timeinterval', '自动': 'auto', '睡眠': 'sleep'}, ['新风', '旁通', '防冻', '时段', '自动', '睡眠']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryOutdoorTemp", 0),
@@ -8368,13 +9485,18 @@ DEVICE_CAPABILITIES = {
             ("QueryFilterAlarm", 0),
             ("QueryExhaustAirSpeed", 0),
             ("QueryAirSupplySpeed", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-COM-ZEHNDER-03": {
+        "name": "森德康舒清新新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'自动': 'auto', '净化': 'purge', '新风': 'fa', '睡眠': 'sleep', '混风': 'mixair', '时段': 'timeinterval'}, ['自动', '净化', '新风', '睡眠', '混风', '时段']),
+            ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
             ("QueryHumidity", 0),
@@ -8382,44 +9504,63 @@ DEVICE_CAPABILITIES = {
             ("QueryTemp", 0),
             ("QueryAntiFrezAlarm", 0),
             ("QueryFilterAlarm", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-ZB-HY-01": {
+        "name": "瑞灵新风",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
         ],
     },
     "RL-FA-ZB-HY-02": {
+        "name": "新风面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
         ],
     },
     "RL-FA-ZB-LF-01": {
+        "name": "新风面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '高速': 'high'}, ['低速', '高速']),
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
             ("QueryChildLock", 0),
-            ("QueryFanSpeed", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
         ],
     },
     "RL-FA-ZB-LF-01-G": {
+        "name": "地辐射+直流风盘",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
@@ -8429,25 +9570,34 @@ DEVICE_CAPABILITIES = {
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-ZB-UR-01": {
+        "name": "新风面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
             ("BypassVavle", "QueryBypassVavle", 0, "旁通阀"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high', '停止': 'stop'}, ['低速', '中速', '高速', '停止']),
         ],
         "sensors": [
             ("QueryPanelLock", 0),
             ("QueryRoomTemp", 0),
             ("QueryFilterClean", 0),
             ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FAP-COM-UR-01": {
+        "name": "新风面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryFanSpeed", 0),
@@ -8455,14 +9605,19 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FAP-COM-YQX-01": {
+        "name": "元气熊五恒一体机内机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetHumidity", "QuerySetHumidity", 0, "设定湿度", 20.0, 80.0, PERCENTAGE),
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '新风': 'fa'}, ['制冷', '制热', '除湿', '新风']),
+            ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
+        ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySetTemp", 0),
             ("QueryInputVoltage", 0),
             ("QueryFilterUsedTime", 0),
             ("QueryFreshAirPump", 0),
@@ -8487,8 +9642,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FAP-ZB-UR-01": {
+        "name": "新风面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryFanSpeed", 0),
@@ -8496,8 +9656,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FAP-ZB-UR-02": {
+        "name": "新风面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryFanSpeed", 0),
@@ -8505,19 +9670,46 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FFA-ZB-LF-01": {
-        "switches": [],
-        "sensors": [],
+        "name": "大金空调新风二合一面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-FH-COM-MENRED-01": {
-        "switches": [],
-        "sensors": [],
+        "name": "曼瑞德集控器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-FHAD-ZB-HY-01": {
-        "switches": [],
-        "sensors": [],
+        "name": "二合一面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-FHB-ZB-UR-01": {
-        "switches": [],
+        "name": "多功能采暖控制器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("funclist", 0),
             ("fun", 0),
@@ -8542,30 +9734,46 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FHD-COM-AIRCONOMY-01": {
+        "name": "艾克诺米地暖温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 10.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
     "RL-FHD-COM-CARRIER-03": {
+        "name": "开利地暖内机",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 1.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryLockFunction", 0),
             ("QueryErrCode", 0),
         ],
     },
     "RL-FHD-COM-HL-01": {
+        "name": "海林地暖",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryHeatStat", 0),
@@ -8573,19 +9781,23 @@ DEVICE_CAPABILITIES = {
             ("QueryMode", 0),
             ("QueryProbeShortCircuit", 0),
             ("QueryLowTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryProbeOpenCircuit", 0),
             ("QueryHighTemp", 0),
         ],
     },
     "RL-FHD-COM-LF-01-E": {
+        "name": "地暖",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -8600,13 +9812,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FHD-COM-LF-01-F": {
+        "name": "双温感地暖",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryEnvTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -8621,12 +9838,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FHD-COM-LF-02-B": {
+        "name": "地辐射",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'地冷': 'floorcool', '地热': 'floorheat'}, ['地冷', '地热']),
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -8642,27 +9865,36 @@ DEVICE_CAPABILITIES = {
             ("QueryGainI", 0),
             ("QueryGainD", 0),
             ("QueryDewPointTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-FHD-LORA-UR-01-INTER": {
+        "name": "水机空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryRoomTemp", 0),
             ("QueryRoomTempCali", 0),
         ],
     },
     "RL-FHD-RF-UR-01": {
+        "name": "水机空调",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryOuterLimitTemp", 0),
             ("QueryRoomTemp", 0),
@@ -8673,43 +9905,63 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FHD-ZB-HY-01": {
+        "name": "瑞灵地暖",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 32.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
         ],
     },
     "RL-FHD-ZB-HY-02": {
+        "name": "地暖面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 32.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryHeatStat", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-FHD-ZB-LF-01": {
+        "name": "地暖温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryHeatStat", 0),
             ("QueryTemp", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-FHD-ZB-LF-01-E": {
+        "name": "地暖",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -8724,13 +9976,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FHD-ZB-LF-01-F": {
+        "name": "双温感地暖",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryEnvTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -8745,8 +10002,14 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-FHD-ZB-LF-02": {
+        "name": "空调面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryHeatStat", 0),
@@ -8757,15 +10020,20 @@ DEVICE_CAPABILITIES = {
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
             ("QueryChildLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryMode", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
         ],
     },
     "RL-FHD-ZB-LF-03": {
+        "name": "二合一面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("ScreenBacklight", 0),
@@ -8780,31 +10048,44 @@ DEVICE_CAPABILITIES = {
             ("QueryFHWorkMode", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
-            ("QueryHotWaterSetTemp", 0),
-            ("TempModeDelayTime", 0),
-            ("PumpStartTemp", 0),
-            ("PumpStopTemp", 0),
             ("Mode", 0),
         ],
     },
     "RL-FHD-ZB-LF-04": {
-        "switches": [],
-        "sensors": [],
+        "name": "水机空调地暖面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-FHD-ZB-LF-04-B": {
+        "name": "水地暖",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
         ],
     },
     "RL-FHD-ZB-UR-01": {
+        "name": "二合一面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("VoiceSwitch", 0),
@@ -8818,17 +10099,18 @@ DEVICE_CAPABILITIES = {
             ("QueryFHWorkMode", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
-            ("QueryHotWaterSetTemp", 0),
-            ("TempModeDelayTime", 0),
-            ("PumpStartTemp", 0),
-            ("PumpStopTemp", 0),
             ("Mode", 0),
         ],
     },
     "RL-FHD-ZB-UR-02": {
+        "name": "地暖面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("SensorSelect", 0),
@@ -8840,13 +10122,18 @@ DEVICE_CAPABILITIES = {
             ("QueryFHWorkMode", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("Mode", 0),
         ],
     },
     "RL-FHD-ZB-UR-03": {
+        "name": "双恒温地暖面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("VoiceSwitch", 0),
@@ -8861,13 +10148,18 @@ DEVICE_CAPABILITIES = {
             ("QueryFHWorkMode", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("Mode", 0),
         ],
     },
     "RL-FHD-ZB-UR-04": {
+        "name": "智能地暖面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("SensorSelect", 0),
@@ -8879,45 +10171,65 @@ DEVICE_CAPABILITIES = {
             ("QueryFHWorkMode", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("Mode", 0),
         ],
     },
     "RL-FHP-COM-LF-01-TP4": {
+        "name": "地暖面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 15.0, 45.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryHeatStat", 0),
             ("QueryAntiFrezzeProtect", 0),
             ("QueryWorkMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QuerySetTempUpperLimit", 0),
             ("QuerySetTempLowerLimit", 0),
         ],
     },
     "RL-FHP-COM-MENRED-01": {
+        "name": "曼瑞德面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "设定模式", {'自动': 'auto', '手动': 'manual'}, ['自动', '手动']),
+        ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-GA-ZB-UR-01": {
-        "switches": [],
+        "name": "燃气泄漏传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryBatPercentage", 0),
             ("QueryAlarmStat", 0),
         ],
     },
     "RL-GL-WIFI-UR-01": {
+        "name": "锅炉模块",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryInsPwr", 0),
@@ -8925,19 +10237,37 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-GL-ZB-UR-01": {
-        "switches": [],
+        "name": "锅炉模块",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-HB-COM-UR-01": {
-        "switches": [],
+        "name": "混水泵站控制器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySetTemp", 0),
         ],
     },
     "RL-HB-COM-UR-02": {
-        "switches": [],
+        "name": "混水控制器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRunMode", 0),
             ("QueryVavleSetTemp1", 0),
@@ -8958,7 +10288,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-HB-INT-UR-01": {
-        "switches": [],
+        "name": "内置混水控制器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRunMode", 0),
             ("QueryVavleSetTemp1", 0),
@@ -8979,17 +10315,22 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-HS-COM-CH-01": {
+        "name": "供热站",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关"),
         ],
+        "numbers": [
+            ("HotWaterSetTemp", "QueryHotWaterSetTemp", 0, "生活热水水温设定", 30.0, 60.0, UnitOfTemperature.CELSIUS),
+            ("HotSetTemp", "QueryHotSetTemp", 0, "采暖水温设定", 25.0, 60.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'夏季': 'summer', '冬季': 'winter'}, ['夏季', '冬季']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryHeatingTempDiff", 0),
             ("QueryZeroColdWaterMode", 0),
-            ("QueryHotWaterSetTemp", 0),
             ("QuerySterilizationDuration", 0),
-            ("QueryHotSetTemp", 0),
             ("QueryZeroColdWaterStartTemp", 0),
             ("QueryZeroColdWaterStopTemp", 0),
             ("QueryHeatForwardTemp", 0),
@@ -9000,28 +10341,38 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-HS-COM-CH-02": {
+        "name": "辐射换热站",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("QueryHotSetTemp", "QueryHotSetTemp", 0, "采暖水温设定", 30.0, 80.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'夏季': 'summer', '冬季': 'winter'}, ['夏季', '冬季']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryHotSetTemp", 0),
             ("QueryHeatingTempDiff", 0),
         ],
     },
     "RL-HS-COM-CH-03": {
+        "name": "供热站",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关"),
         ],
+        "numbers": [
+            ("HotWaterSetTemp", "QueryHotWaterSetTemp", 0, "生活热水水温设定", 30.0, 60.0, UnitOfTemperature.CELSIUS),
+            ("HotSetTemp", "QueryHotSetTemp", 0, "采暖水温设定", 25.0, 60.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "运行模式", {'夏季': 'summer', '冬季': 'winter'}, ['夏季', '冬季']),
+        ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryHeatingTempDiff", 0),
             ("QueryZeroColdWaterMode", 0),
-            ("QueryHotWaterSetTemp", 0),
             ("QuerySterilizationDuration", 0),
-            ("QueryHotSetTemp", 0),
             ("QueryZeroColdWaterStartTemp", 0),
             ("QueryZeroColdWaterStopTemp", 0),
             ("QueryHeatForwardTemp", 0),
@@ -9032,191 +10383,310 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-HW-COM-HS-01": {
+        "name": "热水循环控制器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 0.0, 60.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'节能 1': 'eco1', '节能 2': 'eco2', '恒温': 'constant', '增压': 'boost'}, ['节能 1', '节能 2', '恒温', '增压']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryAntiFrezzeProtect", 0),
             ("QueryDescaling", 0),
         ],
     },
     "RL-HW-COM-ZLD-01": {
+        "name": "热水循环泵控制面板",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'手动': 'manual', '本地定时': 'timing'}, ['手动', '本地定时']),
+        ],
         "sensors": [
             ("QueryChildLock", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryHeatStat", 0),
         ],
     },
     "RL-IR-ZB-UR-01": {
-        "switches": [],
+        "name": "人体红外传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryBatPercentage", 0),
         ],
     },
     "RL-IS-ZB-UR-01": {
+        "name": "便携式中继器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryCurrent", 0),
         ],
     },
     "RL-LM-COM-UR-01": {
-        "switches": [],
-        "sensors": [],
+        "name": "灯光控制模块",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-LMP-COM-UR-01": {
+        "name": "灯光控制模块通道",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
-        "sensors": [],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-LT-ZB-HC-0202S": {
+        "name": "四键复合面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HC-03": {
+        "name": "三键开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HC-04": {
+        "name": "四键开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
             ("Switch", "QuerySwitch", 4, "按键4"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HC-04S": {
-        "switches": [],
-        "sensors": [],
+        "name": "四键场景面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-LT-ZB-HY-01": {
+        "name": "一键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HY-02": {
+        "name": "两键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HY-03": {
+        "name": "三键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HY-04": {
+        "name": "四键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
             ("Switch", "QuerySwitch", 4, "按键4"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HY-06": {
+        "name": "六键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
             ("Switch", "QuerySwitch", 4, "按键4"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-LF-01": {
+        "name": "一键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-LF-02": {
+        "name": "两键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-LF-03": {
+        "name": "三键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-LF-04": {
+        "name": "四键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
             ("Switch", "QuerySwitch", 4, "按键4"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-LF-06": {
+        "name": "六键智能开关",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
             ("Switch", "QuerySwitch", 4, "按键4"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-RY-06S": {
-        "switches": [],
-        "sensors": [],
+        "name": "六键场景面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-MC-ZB-UR-01": {
-        "switches": [],
+        "name": "门磁传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryOpenStat", 0),
             ("QueryAlarmStat", 0),
@@ -9224,38 +10694,66 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-MLT-ZB-HY-01": {
+        "name": "一路灯控模块",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-MLT-ZB-HY-02": {
+        "name": "二路灯控模块",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-MLT-ZB-HY-03": {
+        "name": "三路灯控模块",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-NTC-CSP-UR-01": {
-        "switches": [],
-        "sensors": [],
+        "name": "网转串模块",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-PUMP-COM-HPD-01": {
-        "switches": [],
+        "name": "变频水泵",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRunStat", 0),
             ("QuerySetFreq", 0),
@@ -9264,13 +10762,18 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-RACS-COM-EMMETI-01": {
+        "name": "玻玛系统",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "模式", {'节能': 'eco', '通风': 'fan', '制冷': 'cool', '采暖': 'heat'}, ['节能', '通风', '制冷', '采暖']),
         ],
         "sensors": [
             ("QueryDehumValve", 0),
             ("QueryBeamValve", 0),
-            ("QueryMode", 0),
             ("QueryFloorHeatSetTemp", 0),
             ("QueryRoofHeatSetTemp", 0),
             ("QueryFloorCoolMinLimit", 0),
@@ -9291,11 +10794,16 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-RACS-COM-OLD-01": {
+        "name": "欧龙德五恒系统",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'通风净化': 'fan', '制冷': 'cool', '制热': 'heat'}, ['通风净化', '制冷', '制热']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryRunMode", 0),
@@ -9313,80 +10821,134 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-RD-COM-UR-01": {
-        "switches": [],
+        "name": "存在感应器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryStat", 0),
         ],
     },
     "RL-RD-COM-UR-02": {
-        "switches": [],
+        "name": "毫米波存在感应器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryStat", 0),
         ],
     },
     "RL-SA-ZB-UR-01": {
-        "switches": [],
+        "name": "烟雾传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryAlarmStat", 0),
             ("QueryBatPercentage", 0),
         ],
     },
     "RL-SLT-ZB-HY-01": {
+        "name": "一键单火开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-SLT-ZB-HY-02": {
+        "name": "二键单火开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-SLT-ZB-HY-03": {
+        "name": "三键单火开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-SLT-ZB-LF-01": {
+        "name": "一键单火开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-SLT-ZB-LF-02": {
+        "name": "二键单火开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-SLT-ZB-LF-03": {
+        "name": "三键单火开关面板",
         "switches": [
             ("Switch", "QuerySwitch", 1, "按键1"),
             ("Switch", "QuerySwitch", 2, "按键2"),
             ("Switch", "QuerySwitch", 3, "按键3"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QuerySwitch", 0),
         ],
     },
     "RL-SM-COM-CHNT-01": {
-        "switches": [],
+        "name": "智能电表",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryPhaseAVoltage", 0),
             ("QueryPhaseBVoltage", 0),
@@ -9401,7 +10963,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-SM-COM-HM-01": {
-        "switches": [],
+        "name": "智能电表",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryPhaseAVoltage", 0),
             ("QueryPhaseBVoltage", 0),
@@ -9413,8 +10981,14 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-SMTC-ZB-UR-01": {
+        "name": "暖气片控制器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryTempOffset", 0),
@@ -9423,12 +10997,17 @@ DEVICE_CAPABILITIES = {
             ("QueryHeatStat", 0),
             ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-SMTC-ZB-UR-02": {
+        "name": "暖气片控制器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryTempOffset", 0),
@@ -9437,12 +11016,17 @@ DEVICE_CAPABILITIES = {
             ("QueryHeatStat", 0),
             ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-SMTC-ZB-UR-03": {
+        "name": "暖气片控制器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryBattery", 0),
@@ -9453,13 +11037,18 @@ DEVICE_CAPABILITIES = {
             ("QueryWinDetect", 0),
             ("QueryMode", 0),
             ("QueryChildLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryTempCali", 0),
         ],
     },
     "RL-SMTC-ZB-UR-04": {
+        "name": "暖气片控制器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 5.0, 35.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryTempOffset", 0),
@@ -9471,30 +11060,45 @@ DEVICE_CAPABILITIES = {
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
             ("QueryAntiScaleProtect", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-SO-ZB-UR-01": {
-        "switches": [],
+        "name": "一键开关",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryBatPercentage", 0),
         ],
     },
     "RL-TP4-COM-LF-01": {
+        "name": "房间温控器",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
+        ],
+        "numbers": [
+            ("SetTemp", "QuerySetTemp", 0, "设定温度", 16.0, 30.0, UnitOfTemperature.CELSIUS),
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-VAV-COM-DOAS-01": {
+        "name": "努克姆全空气系统",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
+        "numbers": [
+        ],
+        "selects": [
+            ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan'}, ['制冷', '制热', '通风']),
+        ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryCommAddr", 0),
             ("QueryHumidityControl", 0),
             ("QueryAirHostNum", 0),
@@ -9511,7 +11115,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-VAV-COM-TROX-01": {
-        "switches": [],
+        "name": "变风量阀",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryErrCode", 0),
             ("QuerySetVolumeFlow", 0),
@@ -9524,26 +11134,50 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-VAV-COM-UR-01": {
-        "switches": [],
+        "name": "变风量阀控制器",
+        "switches": [
+        ],
+        "numbers": [
+            ("VavleOpening", "QueryVavleOpening", 0, "调节阀开度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QueryVavleOpening", 0),
         ],
     },
     "RL-WA-ZB-UR-01": {
-        "switches": [],
+        "name": "水浸传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryBatPercentage", 0),
             ("QueryAlarmStat", 0),
         ],
     },
     "RL-WC-ZB-BS-01": {
-        "switches": [],
+        "name": "开合帘电机",
+        "switches": [
+        ],
+        "numbers": [
+            ("Level", "QueryLevel", 0, "设定开度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QueryLevel", 0),
         ],
     },
     "RL-WC-ZB-HY-01": {
-        "switches": [],
+        "name": "单帘面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryOpen", 0),
             ("QueryClose", 0),
@@ -9551,11 +11185,24 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-WC-ZB-HY-02": {
-        "switches": [],
-        "sensors": [],
+        "name": "双帘面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-WC-ZB-LF-01": {
-        "switches": [],
+        "name": "单帘面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryOpen", 0),
             ("QueryClose", 0),
@@ -9563,18 +11210,36 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-WC-ZB-LF-02": {
-        "switches": [],
-        "sensors": [],
+        "name": "双帘面板",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-WC-ZB-WSD-01": {
-        "switches": [],
+        "name": "开合帘电机",
+        "switches": [
+        ],
+        "numbers": [
+            ("Level", "QueryLevel", 0, "设定开度", 0.0, 100.0, PERCENTAGE),
+        ],
+        "selects": [
+        ],
         "sensors": [
-            ("QueryLevel", 0),
         ],
     },
     "RL-WD-ZB-UR-01": {
+        "name": "门窗控制模块",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关"),
+        ],
+        "numbers": [
+        ],
+        "selects": [
         ],
         "sensors": [
             ("QueryInStat", 0),
@@ -9582,23 +11247,48 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "RL-WTS-COM-RK-01": {
-        "switches": [],
+        "name": "水管温度传感器",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryTemp", 0),
         ],
     },
     "RL-ZTC-ZB-UR-01": {
-        "switches": [],
-        "sensors": [],
+        "name": "ZigBee转RS485",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "RL-ZY-COM-ARW-01": {
+        "name": "艾尔文制氧",
         "switches": [
             ("Switch", "QuerySwitch", 0, "开关机"),
         ],
-        "sensors": [],
+        "numbers": [
+        ],
+        "selects": [
+        ],
+        "sensors": [
+        ],
     },
     "URP-ACHS-UR-01": {
-        "switches": [],
+        "name": "约克两联供辅助加热",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("tempref", 0),
             ("period", 0),
@@ -9609,14 +11299,26 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "URP-DEHUMIDIFY-UR-01": {
-        "switches": [],
+        "name": "防霉除湿控制",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
         ],
     },
     "URP-RACS-BOYI-01": {
-        "switches": [],
+        "name": "i温暖多末端控制系统",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -9624,7 +11326,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "URP-RACS-CH-01": {
-        "switches": [],
+        "name": "春晖实验室辐射控制",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRunMode", 0),
             ("QueryMode", 0),
@@ -9633,7 +11341,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "URP-RACS-CH-02": {
-        "switches": [],
+        "name": "热泵和壁挂炉双能源切换控制系统",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
@@ -9643,7 +11357,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "URP-RACS-COREAL-01": {
-        "switches": [],
+        "name": "多末端系统控制",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRunMode", 0),
             ("QueryMode", 0),
@@ -9653,21 +11373,39 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "URP-RACS-COREAL-02": {
-        "switches": [],
+        "name": "可瑞五恒控制系统",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
         ],
     },
     "URP-RACS-COREAL-03": {
-        "switches": [],
+        "name": "可瑞多末端控制系统2",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
         ],
     },
     "URP-RACS-SHUFANG-01": {
-        "switches": [],
+        "name": "多末端系统控制2",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QueryRunMode", 0),
             ("QueryMode", 0),
@@ -9676,7 +11414,13 @@ DEVICE_CAPABILITIES = {
         ],
     },
     "URP-RACS-SHUFANG-02": {
-        "switches": [],
+        "name": "舒房全空气控制系统",
+        "switches": [
+        ],
+        "numbers": [
+        ],
+        "selects": [
+        ],
         "sensors": [
             ("QuerySwitch", 0),
             ("QueryMode", 0),
