@@ -183,11 +183,17 @@ class UrealHomeAPI:
                         gw_map[str(did)] = sn
 
             devices = res["device"]
+            filtered_devices = []
             for device in devices:
                 if isinstance(device, dict):
+                    dev_type = device.get("type", "")
+                    parts = dev_type.split("-")
+                    if len(parts) >= 2 and parts[1] in ("AC", "FH", "NTC", "ZTC"):
+                        continue
                     gw_did = device.get("gw")
                     device["sn"] = gw_map.get(gw_did, gw_map.get(str(gw_did), self._sn))
-            return devices
+                    filtered_devices.append(device)
+            return filtered_devices
         _LOGGER.warning("获取设备列表失败，返回数据格式不正确: %s", res)
         return []
 
