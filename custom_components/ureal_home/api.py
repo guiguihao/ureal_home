@@ -172,7 +172,7 @@ class UrealHomeAPI:
         
         res = await self._post("/host/project/get", {"sn": self._sn})
         _LOGGER.debug("获取设备列表原始数据: %s", res)
-        if res and isinstance(res, dict) and "device" in res:
+        if res and isinstance(res, dict) and ("device" in res or "sku" in res):
             gw_map = {}
             if "gw" in res and isinstance(res["gw"], list):
                 for gw in res["gw"]:
@@ -182,17 +182,36 @@ class UrealHomeAPI:
                         gw_map[did] = sn
                         gw_map[str(did)] = sn
 
-            devices = res["device"]
             filtered_devices = []
-            for device in devices:
-                if isinstance(device, dict):
-                    dev_type = device.get("type", "")
-                    parts = dev_type.split("-")
-                    if len(parts) >= 2 and parts[1] in ("AC", "FH", "NTC", "ZTC"):
-                        continue
-                    gw_did = device.get("gw")
-                    device["sn"] = gw_map.get(gw_did, gw_map.get(str(gw_did), self._sn))
-                    filtered_devices.append(device)
+            
+            # 1. 处理常规子设备列表
+            devices = res.get("device", [])
+            if isinstance(devices, list):
+                for device in devices:
+                    if isinstance(device, dict):
+                        dev_type = device.get("type", "")
+                        parts = dev_type.split("-")
+                        if len(parts) >= 2 and parts[1] in ("AC", "FH", "NTC", "ZTC"):
+                            continue
+                        gw_did = device.get("gw")
+                        device["sn"] = gw_map.get(gw_did, gw_map.get(str(gw_did), self._sn))
+                        filtered_devices.append(device)
+
+            # 2. 处理 SKU 设备列表（例如 WiFi 变频空调等子设备）
+            skus = res.get("sku", [])
+            if isinstance(skus, list):
+                for sku in skus:
+                    if isinstance(sku, dict):
+                        dev_type = sku.get("type", "")
+                        parts = dev_type.split("-")
+                        if len(parts) >= 2 and parts[1] in ("AC", "FH", "NTC", "ZTC"):
+                            continue
+                        # 如果 sku 中没有指定 sn，则利用网关映射或默认使用本网关的 sn
+                        if "sn" not in sku or not sku["sn"]:
+                            gw_did = sku.get("gw")
+                            sku["sn"] = gw_map.get(gw_did, gw_map.get(str(gw_did), self._sn))
+                        filtered_devices.append(sku)
+
             return filtered_devices
         _LOGGER.warning("获取设备列表失败，返回数据格式不正确: %s", res)
         return []
