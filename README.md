@@ -4,7 +4,7 @@
 [![Hassfest Validation](https://github.com/guiguihao/ureal_home/actions/workflows/hassfest.yml/badge.svg)](https://github.com/guiguihao/ureal_home/actions/workflows/hassfest.yml)
 [![HACS Validation](https://github.com/guiguihao/ureal_home/actions/workflows/hacs.yml/badge.svg)](https://github.com/guiguihao/ureal_home/actions/workflows/hacs.yml)
 
-Ureal Home Assistant 集成（`ureal_home`）是专门为接入 [优瑞智能 (hzureal.com)](https://www.hzureal.com/) 设备的 Home Assistant 自定义组件。该集成利用云端 API，能够自动发现并同步您账号下的网关和子设备，并将其作为实体接入 Home Assistant 进行状态监控与联动控制。
+Ureal Home Assistant 集成（`ureal_home`）是专门为接入 [悠瑞智能 (hzureal.com)](https://www.hzureal.com/) 设备的 Home Assistant 自定义组件。该集成利用云端 API，能够自动发现并同步您账号下的网关和子设备，并将其作为实体接入 Home Assistant 进行状态监控与联动控制。
 
 ---
 
