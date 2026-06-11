@@ -1,11 +1,11 @@
 {
   "domain": "ureal_home",
-  "name": "ureal-home",
+  "name": "ureal—home",
   "version": "1.0.0",
-  "documentation": "https://example.com",
+  "documentation": "https://hzureal.com",
   "requirements": [],
   "dependencies": [],
-  "codeowners": ["@yourname"],
+  "codeowners": [],
   "config_flow": true,
   "iot_class": "cloud_polling"
 }
