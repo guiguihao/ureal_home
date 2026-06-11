@@ -1007,7 +1007,7 @@ SENSOR_DESCRIPTIONS = {
         SensorStateClass.MEASUREMENT,
     ),
     "QueryDehumSetUp": (
-        "除湿设定",
+        "设定除湿",
         PERCENTAGE,
         None,
         SensorStateClass.MEASUREMENT,
@@ -2206,12 +2206,6 @@ SENSOR_DESCRIPTIONS = {
         None,
         None,
     ),
-    "QueryHumidify": (
-        "加湿",
-        None,
-        None,
-        None,
-    ),
     "QueryHumidifyIntegralTime": (
         "加湿积分时间",
         None,
@@ -2237,7 +2231,7 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "QueryHumidifySetUp": (
-        "加湿设定",
+        "设定加湿",
         PERCENTAGE,
         SensorDeviceClass.HUMIDITY,
         SensorStateClass.MEASUREMENT,
@@ -2427,12 +2421,6 @@ SENSOR_DESCRIPTIONS = {
         None,
         None,
         None,
-    ),
-    "QueryLevel": (
-        "开度",
-        PERCENTAGE,
-        None,
-        SensorStateClass.MEASUREMENT,
     ),
     "QueryLimitFreqValue": (
         "压缩机当前限频值",
@@ -2777,7 +2765,7 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "QueryMode": (
-        "模式",
+        "工作模式",
         None,
         None,
         None,
@@ -3551,7 +3539,7 @@ SENSOR_DESCRIPTIONS = {
         None,
     ),
     "QuerySetHumidity": (
-        "设定湿度",
+        "实际湿度",
         PERCENTAGE,
         SensorDeviceClass.HUMIDITY,
         SensorStateClass.MEASUREMENT,
@@ -4550,10 +4538,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryHeatWaterTemp", 0),
             ("QuerySystemStat", 0),
             ("QueryHotWaterTemp", 0),
@@ -4584,12 +4568,10 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QuerySetTemp", 0),
             ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryExternalNum", 0),
-            ("QueryMode", 0),
             ("QueryCtrlMode", 0),
             ("QueryPumpType", 0),
             ("QuerySystemStat", 0),
@@ -4606,7 +4588,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryMode", 0),
             ("QueryCompressorA1Stat", 0),
             ("QueryCompressorA2Stat", 0),
@@ -4648,11 +4629,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "运行模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QuerySystemError", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryErrCode", 0),
         ],
     },
@@ -4684,10 +4661,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryCoolTempOffset", 0),
             ("QueryHeatTempOffset", 0),
             ("QueryEnvTemp", 0),
@@ -4801,7 +4774,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryMode", 0),
             ("QueryTCAVMode", 0),
             ("QueryCoolOutletWaterTemp", 0),
@@ -4962,7 +4934,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryRunStat", 0),
             ("QueryPumpSwitch", 0),
             ("QueryElectricHeatSwitch", 0),
@@ -4986,7 +4957,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryRemoteSwitch", 0),
             ("QueryMode", 0),
             ("QueryWaterTempMode", 0),
@@ -5016,11 +4986,7 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
-            ("QueryHotWaterSetTemp", 0),
             ("QueryEnvTemp", 0),
             ("QueryInletWaterTemp", 0),
             ("QueryOutletWaterTemp", 0),
@@ -5070,12 +5036,10 @@ DEVICE_CAPABILITIES = {
             ("QueryACWaterPump", 0),
             ("QueryRemoteSwitch", 0),
             ("QueryWaterSysThreePortValve", 0),
-            ("QueryMode", 0),
             ("QuerySystem2SelfTurnOn", 0),
             ("QueryLinkMode", 0),
             ("QueryCompressorOutputRadio", 0),
             ("QueryTwoPortValve", 0),
-            ("QuerySwitch", 0),
             ("QueryFloorHeatMode", 0),
             ("QueryEnvTemp", 0),
             ("QuerySystemSelfTurnOn", 0),
@@ -5102,8 +5066,6 @@ DEVICE_CAPABILITIES = {
             ("QueryHeatWaterTemp", 0),
             ("QueryCoolWaterTemp", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-AC-COM-MCQUAY-02S": {
@@ -5134,11 +5096,9 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryHeatWaterTemp", 0),
             ("QueryCoolWaterTemp", 0),
             ("QueryHotWaterTemp", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-AC-COM-MCQUAY-03S": {
@@ -5168,12 +5128,10 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'auto': 'auto', 'cool': 'cool', 'heat': 'heat', 'hotwater': 'hotwater', 'cool+hotwater': 'cool+hotwater', 'heat+hotwater': 'heat+hotwater'}, ['auto', 'cool', 'heat', 'hotwater', 'cool+hotwater', 'heat+hotwater']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryHeatWaterSetTemp", 0),
             ("QueryAutoSetTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryCompressorRunFreq", 0),
             ("QueryRunOpening", 0),
             ("QueryEnvTemp", 0),
@@ -5227,10 +5185,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryCoolTempOffsetRange", 0),
             ("QueryEnvTemp", 0),
             ("QueryUseSideInletWaterTemp", 0),
@@ -5312,9 +5266,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryEnvTemp", 0),
             ("QueryInletWaterTemp", 0),
@@ -5335,9 +5286,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryEnvTemp", 0),
             ("QueryInletWaterTemp", 0),
@@ -5357,8 +5305,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-AC-COM-TRANE-05-S": {
@@ -5403,10 +5349,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'停止': 'stop', '制冷': 'cool', '制热': 'heat'}, ['停止', '制冷', '制热']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRunMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryEnergySavingMode", 0),
             ("QueryMuteMode", 0),
             ("QueryHeatPumpTemp", 0),
@@ -5522,7 +5465,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QuerySystemStat", 0),
             ("QueryMode", 0),
             ("QueryRunMode", 0),
@@ -5562,11 +5504,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat', '制热+热水': 'heat+hotwater', '制冷+热水': 'cool+hotwater', '热水': 'hotwater'}, ['制冷', '制热', '制热+热水', '制冷+热水', '热水']),
         ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryHotWaterSetTemp", 0),
-            ("QueryCoolBackwardTemp", 0),
-            ("QueryHeatBackwardTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryUseSideSwitch", 0),
             ("QueryHotSourceSwitch", 0),
             ("QueryHotWaterSwitch", 0),
@@ -5609,8 +5546,6 @@ DEVICE_CAPABILITIES = {
             ("QueryEnvTemp", 0),
             ("QueryLoad", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-AC-COM-ZGOUTES-01": {
@@ -5626,10 +5561,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
             ("QueryOutletWaterTemp", 0),
             ("QueryBackwardTemp", 0),
             ("QueryDefrostMode", 0),
@@ -5667,11 +5598,7 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QuerySensorSelect", 0),
@@ -5692,11 +5619,7 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QuerySensorSelect", 0),
@@ -5743,10 +5666,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
@@ -5765,10 +5684,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
@@ -5788,10 +5703,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryLockFunction", 0),
             ("QueryErrCode", 0),
         ],
@@ -5809,10 +5720,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '超低速': 'llow', '低速': 'low', '中低速': 'mlow', '中速': 'medium', '中高速': 'mhigh', '高速': 'high'}, ['自动', '超低速', '低速', '中低速', '中速', '中高速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryWorkMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryBackAirTemp", 0),
@@ -5840,11 +5747,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-COM-HPD-01": {
@@ -5860,10 +5763,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QuerySleepMode", 0),
             ("QuerySwingAngle", 0),
             ("QueryRoomTemp", 0),
@@ -5889,10 +5788,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
         ],
     },
@@ -5913,12 +5808,7 @@ DEVICE_CAPABILITIES = {
             ("QueryKeyLock", 0),
             ("QueryRemoteLock", 0),
             ("QueryTempLock", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySleepMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryTempOffset", 0),
             ("QueryDiffAdjust", 0),
             ("QueryFanStop", 0),
@@ -5943,12 +5833,8 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '停止': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '停止', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-ZB-HY-01": {
@@ -5964,11 +5850,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-ZB-HY-02": {
@@ -5984,10 +5866,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
         ],
     },
@@ -6004,11 +5882,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACD-ZB-RY-01": {
@@ -6024,10 +5898,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryBackLightMode", 0),
             ("QueryAuxiliaryHeat", 0),
             ("QueryEnergySavingMode", 0),
@@ -6106,16 +5976,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6132,16 +5998,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3'}, ['自动', '1档', '2档', '3档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6158,16 +6020,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6184,16 +6042,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6210,16 +6064,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6236,16 +6086,12 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '地暖': 'floorheat', '制热+地暖': 'heat+floorheat'}, ['制冷', '制热', '除湿', '送风', '地暖', '制热+地暖']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6262,16 +6108,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3'}, ['自动', '1档', '2档', '3档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6288,16 +6130,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6314,16 +6152,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6340,16 +6174,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': '255', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6', '7档': '7', '8档': '8', '9档': '9', '10档': '10'}, ['自动', '1档', '2档', '3档', '4档', '5档', '6档', '7档', '8档', '9档', '10档']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryKeyLock", 0),
             ("QueryBackAirTemp", 0),
             ("QueryTempModeSwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCFSwitch", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
         ],
     },
@@ -6365,10 +6195,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6390,11 +6217,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6421,9 +6244,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6435,7 +6255,6 @@ DEVICE_CAPABILITIES = {
             ("QueryACCloseTempOffset", 0),
             ("QueryFHOpenTempOffset", 0),
             ("QueryFHCloseTempOffset", 0),
-            ("QueryFanSpeed", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
@@ -6452,8 +6271,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryWorkMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QuerySetTempUpperLimit", 0),
             ("QuerySetTempLowerLimit", 0),
         ],
@@ -6470,10 +6287,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -6498,11 +6312,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'超低速': '1', '低速': '2', '中低速': '3', '中速': '4', '中高速': '5', '高速': '6', '超高速': '7'}, ['超低速', '低速', '中低速', '中速', '中高速', '高速', '超高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-30": {
@@ -6518,11 +6328,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': '2', '中速': '4', '高速': '6'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-40": {
@@ -6538,11 +6344,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': '2', '中速': '4', '高速': '6', '超高速': '7'}, ['低速', '中速', '高速', '超高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-41": {
@@ -6558,11 +6360,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'超低速': '1', '低速': '2', '中速': '4', '高速': '6'}, ['超低速', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-50": {
@@ -6578,11 +6376,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'超低速': '1', '低速': '2', '中速': '4', '高速': '6', '超高速': '7'}, ['超低速', '低速', '中速', '高速', '超高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-B320": {
@@ -6598,11 +6392,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '静音': 'mute', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '静音', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MCQUAY-01-D330": {
@@ -6618,11 +6408,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '静音': 'mute', '低速': 'low', '中速': 'medium', '高速': 'high', '超高速': 'hhigh'}, ['自动', '静音', '低速', '中速', '高速', '超高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-MEC-01": {
@@ -6638,13 +6424,9 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速1': 'medium1', '中速2': 'medium2', '高速': 'high'}, ['自动', '低速', '中速1', '中速2', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryVane", 0),
             ("QueryLouver", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-TRANE-01": {
@@ -6662,12 +6444,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QueryFanValve", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-TRANE-02": {
@@ -6684,10 +6461,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-TRANE-03": {
@@ -6704,10 +6477,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-UR-01": {
@@ -6723,11 +6492,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-UR-02": {
@@ -6743,11 +6508,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'超低': 'llow', '低': 'low', '中': 'medium', '高': 'high', '超高': 'hhigh'}, ['超低', '低', '中', '高', '超高']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-VAILLANT-01": {
@@ -6764,12 +6525,8 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
             ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-YORK-01": {
@@ -6787,12 +6544,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QueryMuteMode", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-YORK-02": {
@@ -6810,12 +6562,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QueryMuteMode", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-COM-ZGVRV-01": {
@@ -6843,10 +6590,6 @@ DEVICE_CAPABILITIES = {
             ("QueryAirRegulation", 0),
             ("QueryFloorHeatMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryDirectionCtrl", 0),
         ],
     },
@@ -6863,11 +6606,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-NET-UR-01": {
@@ -6883,10 +6622,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "设定模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan'}, ['制冷', '制热', '除湿', '送风']),
         ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-ALL": {
@@ -6903,11 +6638,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-DK": {
@@ -6924,11 +6655,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-GE": {
@@ -6945,11 +6672,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-HT": {
@@ -6966,11 +6689,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01-TS": {
@@ -6987,11 +6706,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-WIFI-UR-01P-GE": {
@@ -7008,11 +6723,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-ZB-HY-03": {
@@ -7028,11 +6739,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-ZB-LF-01-A": {
@@ -7047,10 +6754,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -7072,11 +6776,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1': 'level1', '2': 'level2', '3': 'level3', '4': 'level4', '5': 'level5', '停止': 'stop'}, ['自动', '1', '2', '3', '4', '5', '停止']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -7102,9 +6802,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -7116,7 +6813,6 @@ DEVICE_CAPABILITIES = {
             ("QueryACCloseTempOffset", 0),
             ("QueryFHOpenTempOffset", 0),
             ("QueryFHCloseTempOffset", 0),
-            ("QueryFanSpeed", 0),
             ("QueryAntiFrezzeProtect", 0),
         ],
     },
@@ -7134,11 +6830,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-ACP-ZB-UR-01": {
@@ -7154,11 +6846,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-ACP-ZB-UR-02": {
@@ -7174,11 +6862,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低': 'low', '中': 'medium', '高': 'high'}, ['低', '中', '高']),
         ],
         "sensors": [
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-AFD-COM-AIRCONOMY-01": {
@@ -7194,10 +6878,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
@@ -7216,10 +6896,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
@@ -7239,10 +6915,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryLockFunction", 0),
             ("QueryErrCode", 0),
         ],
@@ -7262,12 +6934,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动风': 'auto', '低速': 'low', '中速': 'medium', '次高速': 'subhigh', '高速': 'high', '极高速': 'exthigh', '强劲': 'power', '停止': 'stop'}, ['自动风', '低速', '中速', '次高速', '高速', '极高速', '强劲', '停止']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidityControl", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
@@ -7288,10 +6954,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryTemp", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-EMMETI-02": {
@@ -7308,12 +6970,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
-            ("QueryCoolSetTemp", 0),
-            ("QueryHeatSetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
         ],
     },
@@ -7331,10 +6988,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-KM-01": {
@@ -7348,8 +7001,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryFanSpeed", 0),
             ("QueryMode", 0),
             ("QueryMode/ac/fh", 0),
@@ -7375,10 +7026,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryFloorHeatValve", 0),
@@ -7396,8 +7043,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat'}, ['制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QuerySetTemp", 0),
             ("QueryRunMode", 0),
             ("QueryConstantTempCtrl", 0),
@@ -7427,11 +7072,7 @@ DEVICE_CAPABILITIES = {
             ("QueryKeyLock", 0),
             ("QueryRemoteLock", 0),
             ("QueryTempLock", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryTempOffset", 0),
             ("QueryDiffAdjust", 0),
             ("QueryFanStop", 0),
@@ -7466,12 +7107,8 @@ DEVICE_CAPABILITIES = {
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
             ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryValveMinOpening", 0),
             ("QueryValveMaxOpening", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-UR-02": {
@@ -7495,12 +7132,7 @@ DEVICE_CAPABILITIES = {
             ("QueryFHOpenOffset", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QueryKeyLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryValveMinOpening", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-COM-UR-03": {
@@ -7515,11 +7147,8 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '地冷': 'floorcool', '制热+地暖': 'heat+floorheat', '制冷+地冷': 'cool+floorcool'}, ['制冷', '制热', '送风', '除湿', '地暖', '地冷', '制热+地暖', '制冷+地冷']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
             ("QueryRunMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryFanSpeed", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -7560,10 +7189,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '送风': 'fan', '除湿': 'dry', '地暖': 'floorheat', '地冷': 'floorcool', '制热+地暖': 'heat+floorheat', '制冷+地冷': 'cool+floorcool'}, ['制冷', '制热', '送风', '除湿', '地暖', '地冷', '制热+地暖', '制冷+地冷']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryWorkMode", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
             ("QueryFanSpeed", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -7602,13 +7228,8 @@ DEVICE_CAPABILITIES = {
             ("QueryChildLock", "QueryChildLock", 0, "童锁", {'锁定': 'lock', '解锁': 'unlock'}, ['锁定', '解锁']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryCoolHeatSourceStat", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryChildLock", 0),
         ],
     },
     "RL-AFD-COM-XL-02": {
@@ -7625,13 +7246,8 @@ DEVICE_CAPABILITIES = {
             ("ChildLock", "QueryChildLock", 0, "童锁", {'锁定': 'lock', '解锁': 'unlock'}, ['锁定', '解锁']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryCoolHeatSourceStat", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryChildLock", 0),
         ],
     },
     "RL-AFD-ZB-LF-01": {
@@ -7667,14 +7283,10 @@ DEVICE_CAPABILITIES = {
             ("FHCloseTempOffset", 0),
             ("FHOpenTempOffset", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatStat", 0),
             ("QueryWaterValve", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-AFD-ZB-XL-01": {
@@ -7691,13 +7303,8 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high', '停止': 'stop'}, ['自动', '低速', '中速', '高速', '停止']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryCoolHeatSourceStat", 0),
-            ("QuerySetTemp", 0),
-            ("QueryMode", 0),
-            ("QueryChildLock", 0),
             ("QueryHeatStat", 0),
             ("QueryACVavle", 0),
             ("QueryWorkMode", 0),
@@ -7723,15 +7330,12 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '除湿': 'dry', '送风': 'fan', '加湿': 'humidify'}, ['制冷', '制热', '除湿', '送风', '加湿']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryRunMode", 0),
-            ("QueryMode", 0),
             ("QuerySceneMode", 0),
             ("QueryAtHomeWinterSetTemp", 0),
             ("QueryAtHomeSummerSetTemp", 0),
             ("QueryLeaveHomeWinterSetTemp", 0),
             ("QueryLeaveHomeSummerSetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryDehumSetUp", 0),
             ("QueryHumidifySetUp", 0),
             ("QueryServiceTimeLimit", 0),
@@ -7762,11 +7366,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'停止': '0', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5'}, ['停止', '1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QuerySecondaryPump", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
@@ -7800,11 +7399,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动风': 'auto', '低速': 'low', '中速': 'medium', '次高速': 'subhigh', '高速': 'high', '极高速': 'exthigh', '强劲': 'power', '停止': 'stop'}, ['自动风', '低速', '中速', '次高速', '高速', '极高速', '强劲', '停止']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidityControl", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
@@ -7833,8 +7427,6 @@ DEVICE_CAPABILITIES = {
             ("QueryMode", 0),
             ("QueryMainMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryFloorVavle", 0),
             ("QueryHumidity", 0),
             ("QueryPM2.5", 0),
@@ -7856,8 +7448,6 @@ DEVICE_CAPABILITIES = {
             ("QueryMode", 0),
             ("QueryMainMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryFloorVavle", 0),
             ("QueryHumidity", 0),
             ("QueryPM2.5", 0),
@@ -7914,9 +7504,6 @@ DEVICE_CAPABILITIES = {
             ("QueryFanSpeed", 0),
             ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QuerySetEnvTemp", 0),
             ("QueryFloorVavle", 0),
             ("QueryFanValve", 0),
@@ -8324,9 +7911,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '高速': 'high'}, ['低速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
             ("QueryFanValve", 0),
@@ -8347,9 +7931,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '高速': 'high'}, ['低速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
             ("QueryPipeSetHumidity", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
@@ -8376,9 +7957,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'睡眠': 'sleep', '低速': 'low', '高速': 'high'}, ['睡眠', '低速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryPM2.5MeshPeriod", 0),
             ("QuerySetHumidity", 0),
             ("QueryRoomTemp", 0),
@@ -8404,13 +7983,9 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'关闭': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['关闭', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryMeshUsedTime", 0),
-            ("QuerySetHumidity", 0),
             ("QueryFanValve", 0),
             ("QueryChildLock", 0),
             ("QueryUVLight", 0),
@@ -8445,10 +8020,6 @@ DEVICE_CAPABILITIES = {
             ("QueryFAHumidity", 0),
             ("QueryBackTemp", 0),
             ("QueryBackHumidity", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryErrCode", 0),
         ],
     },
@@ -8464,15 +8035,12 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'停止': 'stop', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['停止', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
             ("QueryPM2.5", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
             ("QueryCoolerTemp", 0),
             ("QueryTemp", 0),
             ("QueryHumidity", 0),
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryOPMode", 0),
             ("QueryErrCode", 0),
         ],
@@ -8490,14 +8058,10 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high', '关闭': 'close'}, ['低速', '中速', '高速', '关闭']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryRunMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryInterTemp", 0),
             ("QueryHumidity", 0),
-            ("QuerySetHumidity", 0),
             ("QueryDehumOffset", 0),
             ("QueryMeshExpireTime", 0),
             ("QueryTimingSwitch", 0),
@@ -8534,10 +8098,8 @@ DEVICE_CAPABILITIES = {
             ("QueryVOC", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
-            ("QuerySwitch", 0),
             ("QueryOPMode", 0),
             ("QueryFanValve", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-DH-COM-TOYOSAN-01": {
@@ -8551,7 +8113,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QuerySwitch", 0),
             ("QuerySetTemp", 0),
             ("QuerySys1SetTemp", 0),
             ("QuerySys1SetTempOffset", 0),
@@ -8577,7 +8138,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryErrCode", 0),
             ("QueryMode", 0),
             ("QuerySetTemp", 0),
@@ -8605,7 +8165,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryErrCode", 0),
             ("QueryMode", 0),
             ("QueryFanSpeed", 0),
@@ -8644,10 +8203,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryWorkRunMode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryRunStat", 0),
             ("QueryImportTemp", 0),
@@ -8674,10 +8230,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryWorkRunMode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryRunStat", 0),
             ("QueryImportTemp", 0),
@@ -8705,11 +8258,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "运行模式", {'自动': 'auto', '关闭': 'close', '手动': 'manual', '内循环': 'intloop', '新风除湿': 'fa+dehum', '内循环除湿': 'interloopdry', '定时': 'timing'}, ['自动', '关闭', '手动', '内循环', '新风除湿', '内循环除湿', '定时']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryMode", 0),
             ("QueryHumidity", 0),
-            ("QuerySwitch", 0),
             ("QueryAntiFrezzeProtect", 0),
             ("QueryDefrostMode", 0),
             ("QueryErrCode", 0),
@@ -8726,7 +8275,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QuerySwitch", 0),
             ("QuerySetTemp", 0),
             ("QuerySys1SetTemp", 0),
             ("QuerySys1SetTempOffset", 0),
@@ -8752,7 +8300,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryErrCode", 0),
             ("QueryMode", 0),
             ("QuerySetTemp", 0),
@@ -8806,9 +8353,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryColorTemp", 0),
-            ("QueryBrightness", 0),
         ],
     },
     "RL-DIMC-ZB-RY-01": {
@@ -8822,8 +8366,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryBrightness", 0),
         ],
     },
     "RL-DLQ-COM-UR-01": {
@@ -8836,7 +8378,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryConsumption", 0),
             ("QueryVoltage", 0),
             ("QueryCurrent", 0),
@@ -8855,7 +8396,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryOutletWaterTemp", 0),
         ],
     },
@@ -8971,12 +8511,8 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['自动', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySwitch", 0),
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryMeshExpire", 0),
@@ -9006,12 +8542,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "运行模式", {'换气': 'fan', '除湿': 'dry', '加湿': 'humidify'}, ['换气', '除湿', '加湿']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySetFanDehum", 0),
-            ("QuerySetFanRegen", 0),
             ("QueryFreshAirImportTemp", 0),
             ("QueryFreshAirImportHumidity", 0),
             ("QueryFreshAirExportTemp", 0),
@@ -9034,7 +8564,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-BEIANG-01": {
@@ -9053,10 +8582,6 @@ DEVICE_CAPABILITIES = {
             ("QueryFilterUsedTime", 0),
             ("QueryRoomTemp", 0),
             ("QueryDewPointTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryHumidity", 0),
             ("QueryCO2", 0),
             ("QueryErrCode", 0),
@@ -9095,12 +8620,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySwitch", 0),
             ("QuerySensorType", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryRoomTemp", 0),
             ("QueryMeshExpire", 0),
@@ -9131,10 +8651,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'停止': 'stop', '1档': 'level1', '2档': 'level2', '3档': 'level3'}, ['停止', '1档', '2档', '3档']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryLoopRunTime", 0),
             ("QueryLoopPauseTime", 0),
@@ -9159,8 +8675,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetHumidity", 0),
             ("QueryPM2.5", 0),
             ("QueryCO2", 0),
             ("QueryVOC", 0),
@@ -9182,11 +8696,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'0档': 'level0', '1档': 'level1', '2档': 'level2', '3档': 'level3'}, ['0档', '1档', '2档', '3档']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryDehumSetUp", 0),
-            ("QueryHumidifySetUp", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
             ("QueryDewPointTemp", 0),
@@ -9205,7 +8714,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryFanSpeed", 0),
             ("QueryPanelFanSpeed", 0),
             ("QueryAirSupplySetTemp", 0),
@@ -9234,11 +8742,8 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'0档': '0', '1档': '1', '2档': '2', '3档': '3', '4档': '4', '5档': '5', '6档': '6'}, ['0档', '1档', '2档', '3档', '4档', '5档', '6档']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
-            ("QuerySwitch", 0),
             ("QueryFilterMaxTime", 0),
             ("QueryVOC", 0),
             ("QueryErrCode", 0),
@@ -9257,9 +8762,7 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryMeshPercent", 0),
             ("QueryPM2.5", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-COM-HL-01": {
@@ -9276,11 +8779,8 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryVOC", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
             ("QueryCO2", 0),
-            ("QueryLoopMode", 0),
             ("QueryMeshAlarm", 0),
-            ("QuerySwitch", 0),
             ("QueryPM2.5", 0),
             ("QueryTemp", 0),
         ],
@@ -9297,10 +8797,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryBypassVavle", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
             ("QueryAirQuality", 0),
         ],
@@ -9317,9 +8814,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5', '6档': 'level6', '7档': 'level7'}, ['1档', '2档', '3档', '4档', '5档', '6档', '7档']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryMediumMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
@@ -9342,8 +8836,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'1档': 'level1', '2档': 'level2', '3档': 'level3'}, ['1档', '2档', '3档']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryMediumMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
@@ -9366,8 +8858,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
             ("QueryLeaveMode", 0),
             ("QueryMeshExpire1", 0),
             ("QueryMeshExpire2", 0),
@@ -9385,9 +8875,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "运行模式", {'关闭': 'close', '新风模式': 'fa', '自动模式': 'auto', '除湿模式': 'dry'}, ['关闭', '新风模式', '自动模式', '除湿模式']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
             ("QueryCompressorSwitch", 0),
@@ -9416,11 +8903,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
-            ("QueryDehumSetUp", 0),
-            ("QueryHumidifySetUp", 0),
             ("QueryPrimaryMeshStat", 0),
             ("QueryMediumMeshStat", 0),
             ("QueryEfficientMeshStat", 0),
@@ -9445,10 +8927,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
-            ("QuerySetHumidity", 0),
             ("QueryOuterLoop", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
@@ -9471,9 +8949,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
             ("QueryHumidification", 0),
             ("QueryFanValveAutoHumidity", 0),
             ("QueryRoomTemp", 0),
@@ -9482,10 +8957,8 @@ DEVICE_CAPABILITIES = {
             ("QueryOutdoorHumidity", 0),
             ("QueryDewPointTemp", 0),
             ("QueryMoistureContent", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFanValve", 0),
             ("QueryFanValveAutoFuction", 0),
-            ("QueryMode", 0),
             ("QueryRunTime", 0),
             ("QueryIntSensor", 0),
             ("QueryExtSensor", 0),
@@ -9506,14 +8979,12 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-COM-MEC-01": {
@@ -9527,8 +8998,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'自动': 'auto', '低速': 'low', '中速1': 'medium1', '中速2': 'medium2', '高速': 'high'}, ['自动', '低速', '中速1', '中速2', '高速']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-MENRED-01": {
@@ -9546,9 +9015,6 @@ DEVICE_CAPABILITIES = {
             ("QueryFilterAlarm", 0),
             ("QueryRoomTemp", 0),
             ("QueryMeshUsedTime", 0),
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryWindRoute", 0),
             ("QueryHumidity", 0),
         ],
@@ -9566,10 +9032,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryChildLock", 0),
-            ("QueryBypassVavle", 0),
-            ("QuerySwitch", 0),
             ("QueryMeshExpire", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
         ],
     },
@@ -9586,10 +9049,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryOPMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
             ("QuerySetHumidity", 0),
             ("QuerySetPM2.5", 0),
@@ -9619,8 +9079,6 @@ DEVICE_CAPABILITIES = {
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFilterMaintenance", 0),
         ],
     },
@@ -9641,8 +9099,6 @@ DEVICE_CAPABILITIES = {
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFilterMaintenance", 0),
         ],
     },
@@ -9659,9 +9115,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryMeshLeftChangeTime", 0),
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-FA-COM-PANASONIC-01-F": {
@@ -9678,9 +9131,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryMeshLeftCleanTime", 0),
             ("QueryMeshLeftChangeTime", 0),
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-FA-COM-PANASONIC-01-FL": {
@@ -9697,9 +9147,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryMeshLeftCleanTime", 0),
             ("QueryMeshLeftChangeTime", 0),
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryColdField", 0),
             ("QueryRoomTemp", 0),
             ("QueryOutdoorTemp", 0),
@@ -9719,13 +9166,9 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'待机': 'idle', '低速': 'low', '中速': 'medium', '高速': 'high'}, ['待机', '低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryRoomTemp", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRunMode", 0),
             ("QueryMeshUsedTime", 0),
-            ("QuerySetHumidity", 0),
             ("QueryFanValve", 0),
             ("QueryChildLock", 0),
             ("QueryUVLight", 0),
@@ -9748,9 +9191,6 @@ DEVICE_CAPABILITIES = {
             ("QueryErrCode", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
-            ("QueryMode", 0),
-            ("QueryImportSpeed", 0),
-            ("QueryExportSpeed", 0),
         ],
     },
     "RL-FA-COM-SMART-02": {
@@ -9768,9 +9208,6 @@ DEVICE_CAPABILITIES = {
             ("QueryErrCode", 0),
             ("QueryOutdoorTemp", 0),
             ("QueryOutdoorHumidity", 0),
-            ("QueryMode", 0),
-            ("QueryImportSpeed", 0),
-            ("QueryExportSpeed", 0),
         ],
     },
     "RL-FA-COM-ST-01": {
@@ -9793,15 +9230,7 @@ DEVICE_CAPABILITIES = {
             ("QueryRoomTemp", 0),
             ("QueryMeshUsedTime", 0),
             ("QueryCoilTemp", 0),
-            ("QuerySwitch", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySetHumidity", 0),
             ("QueryFilterClean", 0),
-            ("QueryFanValve", 0),
-            ("QueryInnerLoop", 0),
-            ("QueryDehum", 0),
-            ("QueryHumidify", 0),
-            ("QueryAnion", 0),
             ("QueryHumidity", 0),
             ("QueryErrCode", 0),
         ],
@@ -9818,10 +9247,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "风速", {'低速': 'low', '中速': 'medium', '高速': 'high', '关闭': 'close'}, ['低速', '中速', '高速', '关闭']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryBypassVavle", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QueryHumidity", 0),
             ("QueryMeshUsedTime", 0),
@@ -9849,11 +9275,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
             ("QueryHumidity", 0),
             ("QueryPM2.5", 0),
             ("QueryCO2", 0),
@@ -9880,8 +9301,6 @@ DEVICE_CAPABILITIES = {
             ("QueryMeshLife", 0),
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryTemp", 0),
         ],
@@ -9897,7 +9316,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryPM2.5", 0),
-            ("QueryMode", 0),
             ("QueryOutdoorTemp", 0),
         ],
     },
@@ -9913,9 +9331,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'1档': '1', '2档': '2', '3档': '3'}, ['1档', '2档', '3档']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-VORTICE-02": {
@@ -9932,12 +9347,9 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryPM2.5", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryFilterAlarm", 0),
             ("QueryTemp", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-VORTICE-03": {
@@ -9956,12 +9368,9 @@ DEVICE_CAPABILITIES = {
             ("QueryCO2", 0),
             ("QueryPM2.5", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryFilterAlarm", 0),
             ("QueryTemp", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-VORTICE-04": {
@@ -9976,12 +9385,10 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryTemp", 0),
             ("QueryExportTemp", 0),
             ("QueryImportTemp", 0),
             ("QueryOutdoorTemp", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-WOLF-01": {
@@ -10000,12 +9407,9 @@ DEVICE_CAPABILITIES = {
             ("QueryVOC", 0),
             ("QueryPM2.5", 0),
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
             ("QueryHumidity", 0),
             ("QueryFilterAlarm", 0),
             ("QueryTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
         ],
     },
@@ -10024,13 +9428,7 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '低速': 'low', '高速': 'high'}, ['自动', '低速', '高速']),
         ],
         "sensors": [
-            ("QueryMode", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySwitch", 0),
-            ("QueryPurge", 0),
             ("QueryMeshExpire", 0),
-            ("QueryFanSpeed", 0),
             ("QueryFanStat", 0),
             ("QueryCompressorStat", 0),
             ("QueryHumidity", 0),
@@ -10053,10 +9451,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
         ],
@@ -10075,10 +9469,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
-            ("QueryFanSpeed", 0),
             ("QueryRoomTemp", 0),
             ("QuerySleepMode", 0),
         ],
@@ -10128,10 +9518,7 @@ DEVICE_CAPABILITIES = {
             ("QueryFilterAlarm", 0),
             ("QueryExhaustAirFeedBack", 0),
             ("QueryAirSupplyFeedBack", 0),
-            ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-ZEHNDER-02": {
@@ -10155,9 +9542,6 @@ DEVICE_CAPABILITIES = {
             ("QueryFilterAlarm", 0),
             ("QueryExhaustAirSpeed", 0),
             ("QueryAirSupplySpeed", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-COM-ZEHNDER-03": {
@@ -10177,9 +9561,6 @@ DEVICE_CAPABILITIES = {
             ("QueryTemp", 0),
             ("QueryAntiFrezAlarm", 0),
             ("QueryFilterAlarm", 0),
-            ("QueryMode", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FA-ZB-HY-01": {
@@ -10193,8 +9574,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
             ("QueryTemp", 0),
         ],
     },
@@ -10209,8 +9588,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'低速': 'low', '中速': 'medium', '高速': 'high'}, ['低速', '中速', '高速']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
             ("QueryRoomTemp", 0),
         ],
     },
@@ -10227,9 +9604,7 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
-            ("QueryFanSpeed", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
         ],
@@ -10246,14 +9621,12 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
             ("QueryHumidity", 0),
-            ("QueryFanSpeed", 0),
         ],
     },
     "RL-FA-ZB-UR-01": {
@@ -10272,9 +9645,6 @@ DEVICE_CAPABILITIES = {
             ("QueryRoomTemp", 0),
             ("QueryFilterClean", 0),
             ("QueryMode", 0),
-            ("QueryBypassVavle", 0),
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-FAP-COM-UR-01": {
@@ -10287,7 +9657,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryFanSpeed", 0),
             ("QueryMode", 0),
         ],
@@ -10306,11 +9675,6 @@ DEVICE_CAPABILITIES = {
             ("FanSpeed", "QueryFanSpeed", 0, "设定风速", {'自动': 'auto', '1档': 'level1', '2档': 'level2', '3档': 'level3', '4档': 'level4', '5档': 'level5'}, ['自动', '1档', '2档', '3档', '4档', '5档']),
         ],
         "sensors": [
-            ("QueryFanSpeed", 0),
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
-            ("QuerySetHumidity", 0),
-            ("QuerySetTemp", 0),
             ("QueryInputVoltage", 0),
             ("QueryFilterUsedTime", 0),
             ("QueryFreshAirPump", 0),
@@ -10344,7 +9708,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryFanSpeed", 0),
             ("QueryMode", 0),
         ],
@@ -10359,7 +9722,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryFanSpeed", 0),
             ("QueryMode", 0),
         ],
@@ -10439,8 +9801,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryRoomTemp", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
@@ -10458,8 +9818,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryLockFunction", 0),
             ("QueryErrCode", 0),
         ],
@@ -10479,9 +9837,7 @@ DEVICE_CAPABILITIES = {
             ("QueryRoomTemp", 0),
             ("QueryMode", 0),
             ("QueryProbeShortCircuit", 0),
-            ("QuerySwitch", 0),
             ("QueryLowTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryProbeOpenCircuit", 0),
             ("QueryHighTemp", 0),
         ],
@@ -10499,8 +9855,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -10527,8 +9881,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryEnvTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -10555,8 +9907,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -10572,7 +9922,6 @@ DEVICE_CAPABILITIES = {
             ("QueryGainI", 0),
             ("QueryGainD", 0),
             ("QueryDewPointTemp", 0),
-            ("QueryMode", 0),
         ],
     },
     "RL-FHD-LORA-UR-01-INTER": {
@@ -10587,8 +9936,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryRoomTemp", 0),
             ("QueryRoomTempCali", 0),
@@ -10605,8 +9952,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryOuterLimitTemp", 0),
             ("QueryRoomTemp", 0),
@@ -10628,8 +9973,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QuerySetTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryRoomTemp", 0),
         ],
     },
@@ -10645,9 +9988,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatStat", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-FHD-ZB-LF-01": {
@@ -10663,8 +10004,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryHeatStat", 0),
             ("QueryTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-FHD-ZB-LF-01-E": {
@@ -10680,8 +10019,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryMode", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -10708,8 +10045,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryRoomTemp", 0),
             ("QueryEnvTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
             ("QueryTempCali", 0),
             ("QueryHumidityCali", 0),
@@ -10741,9 +10076,7 @@ DEVICE_CAPABILITIES = {
             ("QueryCloseTempOffset", 0),
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryMode", 0),
             ("QueryScreenBacklight", 0),
             ("QueryBeep", 0),
@@ -10770,10 +10103,8 @@ DEVICE_CAPABILITIES = {
             ("QueryRoomTemp", 0),
             ("QueryVRVWorkMode", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryHotWaterSetTemp", 0),
             ("TempModeDelayTime", 0),
             ("PumpStartTemp", 0),
@@ -10804,8 +10135,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QueryChildLock", 0),
         ],
     },
@@ -10829,10 +10158,8 @@ DEVICE_CAPABILITIES = {
             ("QueryRoomTemp", 0),
             ("QueryVRVWorkMode", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryHotWaterSetTemp", 0),
             ("TempModeDelayTime", 0),
             ("PumpStartTemp", 0),
@@ -10858,10 +10185,8 @@ DEVICE_CAPABILITIES = {
             ("FHOpenTempOffset", 0),
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("Mode", 0),
         ],
     },
@@ -10886,10 +10211,8 @@ DEVICE_CAPABILITIES = {
             ("QueryRoomTemp", 0),
             ("QueryExtSensorTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("Mode", 0),
         ],
     },
@@ -10911,10 +10234,8 @@ DEVICE_CAPABILITIES = {
             ("FHOpenTempOffset", 0),
             ("QueryRoomTemp", 0),
             ("QueryFHWorkMode", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatStat", 0),
             ("QueryPanelLock", 0),
-            ("QuerySetTemp", 0),
             ("Mode", 0),
         ],
     },
@@ -10933,8 +10254,6 @@ DEVICE_CAPABILITIES = {
             ("QueryAntiFrezzeProtect", 0),
             ("QueryWorkMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
             ("QuerySetTempUpperLimit", 0),
             ("QuerySetTempLowerLimit", 0),
         ],
@@ -10952,10 +10271,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryHeatStat", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-GA-ZB-UR-01": {
@@ -10983,7 +10299,6 @@ DEVICE_CAPABILITIES = {
         "sensors": [
             ("QueryInsPwr", 0),
             ("QueryElecQuantity", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-GL-ZB-UR-01": {
@@ -11078,13 +10393,9 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryHeatingTempDiff", 0),
             ("QueryZeroColdWaterMode", 0),
-            ("QueryHotWaterSetTemp", 0),
             ("QuerySterilizationDuration", 0),
-            ("QueryHotSetTemp", 0),
             ("QueryZeroColdWaterStartTemp", 0),
             ("QueryZeroColdWaterStopTemp", 0),
             ("QueryHeatForwardTemp", 0),
@@ -11107,9 +10418,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QueryMode", 0),
-            ("QueryHotSetTemp", 0),
-            ("QuerySwitch", 0),
             ("QueryHeatingTempDiff", 0),
         ],
     },
@@ -11127,13 +10435,9 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryErrCode", 0),
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryHeatingTempDiff", 0),
             ("QueryZeroColdWaterMode", 0),
-            ("QueryHotWaterSetTemp", 0),
             ("QuerySterilizationDuration", 0),
-            ("QueryHotSetTemp", 0),
             ("QueryZeroColdWaterStartTemp", 0),
             ("QueryZeroColdWaterStopTemp", 0),
             ("QueryHeatForwardTemp", 0),
@@ -11155,10 +10459,7 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "模式", {'节能 1': 'eco1', '节能 2': 'eco2', '恒温': 'constant', '增压': 'boost'}, ['节能 1', '节能 2', '恒温', '增压']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryAntiFrezzeProtect", 0),
             ("QueryDescaling", 0),
         ],
@@ -11176,10 +10477,7 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryChildLock", 0),
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryRoomTemp", 0),
-            ("QuerySetTemp", 0),
             ("QueryHeatStat", 0),
         ],
     },
@@ -11206,7 +10504,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryCurrent", 0),
-            ("QuerySwitch", 0),
         ],
     },
     "RL-LM-COM-UR-01": {
@@ -11230,7 +10527,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
         ],
     },
     "RL-LT-ZB-HC-0202S": {
@@ -11541,10 +10837,8 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "模式", {'节能': 'eco', '通风': 'fan', '制冷': 'cool', '采暖': 'heat'}, ['节能', '通风', '制冷', '采暖']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryDehumValve", 0),
             ("QueryBeamValve", 0),
-            ("QueryMode", 0),
             ("QueryFloorHeatSetTemp", 0),
             ("QueryRoofHeatSetTemp", 0),
             ("QueryFloorCoolMinLimit", 0),
@@ -11575,8 +10869,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'通风净化': 'fan', '制冷': 'cool', '制热': 'heat'}, ['通风净化', '制冷', '制热']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryCoolSetTemp", 0),
             ("QueryHeatSetTemp", 0),
             ("QueryRunMode", 0),
@@ -11770,8 +11062,6 @@ DEVICE_CAPABILITIES = {
             ("QueryHeatStat", 0),
             ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-SMTC-ZB-UR-02": {
@@ -11791,8 +11081,6 @@ DEVICE_CAPABILITIES = {
             ("QueryHeatStat", 0),
             ("QueryMode", 0),
             ("QueryTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-SMTC-ZB-UR-03": {
@@ -11813,9 +11101,7 @@ DEVICE_CAPABILITIES = {
             ("QueryWinStat", 0),
             ("QueryWinDetect", 0),
             ("QueryMode", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
-            ("QuerySetTemp", 0),
             ("QueryTempCali", 0),
         ],
     },
@@ -11836,11 +11122,9 @@ DEVICE_CAPABILITIES = {
             ("QueryErrCode", 0),
             ("QueryBattery", 0),
             ("QueryWinStat", 0),
-            ("QuerySwitch", 0),
             ("QueryChildLock", 0),
             ("QueryAntiFrezzeProtect", 0),
             ("QueryAntiScaleProtect", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-SO-ZB-UR-01": {
@@ -11867,8 +11151,6 @@ DEVICE_CAPABILITIES = {
         ],
         "sensors": [
             ("QueryRoomTemp", 0),
-            ("QuerySwitch", 0),
-            ("QuerySetTemp", 0),
         ],
     },
     "RL-VAV-COM-DOAS-01": {
@@ -11882,8 +11164,6 @@ DEVICE_CAPABILITIES = {
             ("Mode", "QueryMode", 0, "工作模式", {'制冷': 'cool', '制热': 'heat', '通风': 'fan'}, ['制冷', '制热', '通风']),
         ],
         "sensors": [
-            ("QuerySwitch", 0),
-            ("QueryMode", 0),
             ("QueryCommAddr", 0),
             ("QueryHumidityControl", 0),
             ("QueryAirHostNum", 0),
@@ -11928,7 +11208,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QueryVavleOpening", 0),
         ],
     },
     "RL-WA-ZB-UR-01": {
@@ -11954,7 +11233,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QueryLevel", 0),
         ],
     },
     "RL-WC-ZB-HY-01": {
@@ -12017,7 +11295,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QueryLevel", 0),
         ],
     },
     "RL-WD-ZB-UR-01": {
@@ -12030,7 +11307,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
             ("QueryInStat", 0),
             ("QueryMode", 0),
         ],
@@ -12068,7 +11344,6 @@ DEVICE_CAPABILITIES = {
         "selects": [
         ],
         "sensors": [
-            ("QuerySwitch", 0),
         ],
     },
     "URP-ACHS-UR-01": {
