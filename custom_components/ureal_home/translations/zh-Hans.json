@@ -3,12 +3,10 @@
     "step": {
       "user": {
         "title": "连接到 ureal-home 云平台",
-        "description": "请输入您的 ureal-home 云平台凭据（手机号、密码和 App Key）。",
+        "description": "请输入您的 ureal-home 云平台凭据（手机号和密码）。",
         "data": {
-          "api_url": "API 地址",
           "username": "手机号",
-          "password": "密码",
-          "app_key": "App Key"
+          "password": "密码"
         }
       },
       "select_gateway": {
@@ -20,17 +18,16 @@
       },
       "reauth_confirm": {
         "title": "重新验证 ureal-home",
-        "description": "您的会话已过期，请重新输入密码和 App Key。",
+        "description": "您的会话已过期，请重新输入密码。",
         "data": {
           "username": "手机号",
-          "password": "密码",
-          "app_key": "App Key"
+          "password": "密码"
         }
       }
     },
     "error": {
       "cannot_connect": "无法连接到服务器，请检查 API 地址。",
-      "invalid_auth": "手机号、密码或 App Key 错误。",
+      "invalid_auth": "手机号或密码错误。",
       "no_gateways": "该账号下未找到任何网关。",
       "unknown": "发生未知错误。"
     },
@@ -41,3 +38,4 @@
     }
   }
 }
+

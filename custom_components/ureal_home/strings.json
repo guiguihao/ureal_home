@@ -3,12 +3,10 @@
     "step": {
       "user": {
         "title": "Connect to hzureal Cloud",
-        "description": "Enter your hzureal cloud credentials (Phone, Password, and App Key).",
+        "description": "Enter your hzureal cloud credentials (Phone and Password).",
         "data": {
-          "api_url": "API URL",
           "username": "Phone",
-          "password": "Password",
-          "app_key": "App Key"
+          "password": "Password"
         }
       },
       "select_gateway": {
@@ -20,17 +18,16 @@
       },
       "reauth_confirm": {
         "title": "Re-authenticate hzureal",
-        "description": "Your session has expired. Please enter your Password and App Key again.",
+        "description": "Your session has expired. Please enter your Password again.",
         "data": {
           "username": "Phone",
-          "password": "Password",
-          "app_key": "App Key"
+          "password": "Password"
         }
       }
     },
     "error": {
       "cannot_connect": "Failed to connect to the server. Check the API URL.",
-      "invalid_auth": "Invalid phone, password, or App Key.",
+      "invalid_auth": "Invalid phone or password.",
       "no_gateways": "No gateways found for this account.",
       "unknown": "An unexpected error occurred."
     },
@@ -41,3 +38,4 @@
     }
   }
 }
+

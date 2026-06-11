@@ -27,10 +27,8 @@ _LOGGER = logging.getLogger(__name__)
 # 定义 UI 界面表单的 Schema 结构
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_API_URL, default=DEFAULT_API_URL): str,
         vol.Required(CONF_USERNAME): str,
         vol.Required(CONF_PASSWORD): str,
-        vol.Required(CONF_APP_KEY, default=DEFAULT_APP_KEY): str,
     }
 )
 
@@ -52,11 +50,13 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            api_url = DEFAULT_API_URL
+            app_key = DEFAULT_APP_KEY
             session = async_get_clientsession(self.hass)
             api = UrealHomeAPI(
                 session=session,
-                api_url=user_input[CONF_API_URL],
-                app_key=user_input[CONF_APP_KEY],
+                api_url=api_url,
+                app_key=app_key,
             )
 
             try:
@@ -79,11 +79,11 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     errors["base"] = "no_gateways"
                 else:
                     self._temporary_data = {
-                        CONF_API_URL: user_input[CONF_API_URL],
+                        CONF_API_URL: api_url,
                         CONF_USERNAME: user_input[CONF_USERNAME],
                         CONF_PASSWORD: user_input[CONF_PASSWORD],
                         CONF_TOKEN: token,
-                        CONF_APP_KEY: user_input[CONF_APP_KEY],
+                        CONF_APP_KEY: app_key,
                     }
                     self._homes = homes
                     return await self.async_step_select_gateway()
@@ -176,7 +176,7 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             api = UrealHomeAPI(
                 session=session,
                 api_url=existing_entry.data[CONF_API_URL],
-                app_key=user_input[CONF_APP_KEY],
+                app_key=existing_entry.data.get(CONF_APP_KEY, DEFAULT_APP_KEY),
             )
 
             try:
@@ -203,7 +203,6 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                         CONF_USERNAME: user_input[CONF_USERNAME],
                         CONF_PASSWORD: user_input[CONF_PASSWORD],
                         CONF_TOKEN: token,
-                        CONF_APP_KEY: user_input[CONF_APP_KEY],
                     },
                 )
                 await self.hass.config_entries.async_reload(existing_entry.entry_id)
@@ -215,7 +214,6 @@ class UrealHomeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 {
                     vol.Required(CONF_USERNAME): str,
                     vol.Required(CONF_PASSWORD): str,
-                    vol.Required(CONF_APP_KEY, default=DEFAULT_APP_KEY): vol.All(str),
                 }
             ),
             errors=errors,
