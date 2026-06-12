@@ -206,10 +206,6 @@ class UrealHomeAPI:
                         parts = dev_type.split("-")
                         if len(parts) >= 2 and parts[1] in ("AC", "FH", "NTC", "ZTC"):
                             continue
-                        # 如果 sku 中没有指定 sn，则利用网关映射或默认使用本网关的 sn
-                        if "sn" not in sku or not sku["sn"]:
-                            gw_did = sku.get("gw")
-                            sku["sn"] = gw_map.get(gw_did, gw_map.get(str(gw_did), self._sn))
                         filtered_devices.append(sku)
 
             return filtered_devices
@@ -259,7 +255,7 @@ class UrealHomeAPI:
             "idx": idx,
             "node": node,
             "value": str(value),
-            "clientType": "Android",
+            "clientType": "HA",
         }
         await self._post("/device/ai/ctrl", payload)
         return True
