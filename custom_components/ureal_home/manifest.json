@@ -5,9 +5,9 @@
     "@guiguihao"
   ],
   "config_flow": true,
-  "documentation": "https://hzureal.com",
+  "documentation": "https://github.com/guiguihao/ureal_home",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/guiguihao/ureal_home/issues",
   "requirements": [],
-  "version": "1.0.5"
+  "version": "1.0.7"
 }

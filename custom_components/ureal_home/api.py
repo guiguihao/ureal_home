@@ -13,6 +13,20 @@ import aiohttp
 
 _LOGGER = logging.getLogger(__name__)
 
+SENSITIVE_KEYS = {"token", "pwd", "password", "phone"}
+
+
+def _mask_sensitive_data(data: Any) -> Any:
+    """Mask sensitive fields such as tokens, passwords, and phone numbers in logs."""
+    if isinstance(data, dict):
+        return {
+            k: "***" if k.lower() in SENSITIVE_KEYS else _mask_sensitive_data(v)
+            for k, v in data.items()
+        }
+    if isinstance(data, list):
+        return [_mask_sensitive_data(item) for item in data]
+    return data
+
 
 class CannotConnect(Exception):
     """无法连接到服务器的异常。"""
@@ -66,7 +80,11 @@ class UrealHomeAPI:
         if self._app_key and "appKey" not in payload:
             payload["appKey"] = self._app_key
 
-        _LOGGER.debug("发送 API 请求: POST %s, Payload: %s", endpoint, payload)
+        _LOGGER.debug(
+            "发送 API 请求: POST %s, Payload: %s",
+            endpoint,
+            _mask_sensitive_data(payload),
+        )
 
         last_error = None
         for attempt in range(retries + 1):
@@ -78,12 +96,13 @@ class UrealHomeAPI:
                     timeout=aiohttp.ClientTimeout(total=10)
                 ) as resp:
                     raw_text = await resp.text()
+                    is_login = endpoint == "/user/login"
                     _LOGGER.debug(
                         "HTTP 原始响应: POST %s → 状态码: %s, Headers: %s, Body: %s",
                         endpoint,
                         resp.status,
                         dict(resp.headers),
-                        raw_text,
+                        "<MASKED>" if is_login else raw_text,
                     )
 
                     if resp.status != 200:
@@ -95,7 +114,11 @@ class UrealHomeAPI:
                     try:
                         result = json.loads(raw_text)
                     except json.JSONDecodeError as err:
-                        _LOGGER.error("解析 JSON 响应失败: %s, Body: %s", err, raw_text)
+                        _LOGGER.error(
+                            "解析 JSON 响应失败: %s, Body: %s",
+                            err,
+                            "<MASKED>" if is_login else raw_text,
+                        )
                         raise CannotConnect(f"无效的 JSON 响应: {err}")
 
                     _LOGGER.debug(
@@ -103,7 +126,7 @@ class UrealHomeAPI:
                         endpoint,
                         result.get("code"),
                         result.get("msg"),
-                        result.get("data"),
+                        _mask_sensitive_data(result.get("data")),
                     )
 
                     if result.get("code") != 0:
